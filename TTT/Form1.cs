@@ -15,13 +15,14 @@ namespace TTT
         //Boolean welcher angibt welcher Spieler am zug ist!
         // Spieler 1 entspricht activePlayer = false
         // Spieler 2 entspricht active Player = true
-
         // Spieler 1 beginnt!
         bool activePlayer = false;
 
         //Zähler der Spielzüge
         double spielzug = 0;
 
+        //Gewinner String für die Gewinner MessageBox!
+        String Gewinner = "";
 
         public Form1()
         {
@@ -65,22 +66,22 @@ namespace TTT
             
             if (activePlayer)   //Abfrage welcher Spieler gerade aktiv ist
             {
-                button.Text = "X";
-                lbl_player.Text = "Spieler O ist nun am Zug!";
+                button.Text = "X";  //Button Text ändern zu X da Spieler X Button betätigt hat!
+                lbl_player.Text = "Spieler O ist nun am Zug!";  //label ändern um bekannt zu geben welcher Spieler am Zug ist
             }
             else
             {
-                button.Text="O";
-                lbl_player.Text = "Spieler X ist nun am Zug!";
+                button.Text="O";    //Button Text ändern zu Y da Spieler Y Button betätigt hat!
+                lbl_player.Text = "Spieler X ist nun am Zug!";  //label ändern um bekannt zu geben welcher Spieler am Zug ist
             }
 
             //Wechseln des Aktuellen Spielers
             activePlayer = !activePlayer;
 
             //Deaktivieren des Buttons nach Spielzug!
-            button.Enabled = false;
+            button.Enabled = false; //Button deaktivieren um erneutes Betätigen zu verhindern!
 
-            winnerCheck();
+            winnerCheck();  //Überprüfen ob Spieler gewonnen hat!
         }
 
         private void winnerCheck()
@@ -107,20 +108,20 @@ namespace TTT
             {
                 winnerAvaible = true;   //Gewinner ist bekannt!
             }
-            else if ((A2.Text == B2.Text) && (B2.Text == C2.Text) && (!A2.Enabled))
+            else if ((A2.Text == B2.Text) && (B2.Text == C2.Text) && (!A2.Enabled)) //zweite Spalte
             {
                 winnerAvaible = true;   //Gewinner ist bekannt!
-            }else if ((A3.Text == B3.Text) && (B3.Text == C3.Text) && (!A3.Enabled))
+            }else if ((A3.Text == B3.Text) && (B3.Text == C3.Text) && (!A3.Enabled))    //dritte Spalte
             {
                 winnerAvaible = true;   //Gewinner ist bekannt!
             }
 
             //Diagonale Abfragen
 
-            if((A1.Text == B2.Text) && (B2.Text == C3.Text) && (!B2.Enabled))
+            if((A1.Text == B2.Text) && (B2.Text == C3.Text) && (!B2.Enabled))   //Diagonal von Oben Links nach unten Rechts!
             {
                 winnerAvaible = true;   //Gewinner ist bekannt!
-            }else if((A3.Text == B2.Text) && (B2.Text == C1.Text) && (!B2.Enabled))
+            }else if((A3.Text == B2.Text) && (B2.Text == C1.Text) && (!B2.Enabled)) //Diagonal von Oben Rechts nach unten Links!
             {
                 winnerAvaible = true;   //Gewinner ist bekannt!
             }
@@ -129,7 +130,6 @@ namespace TTT
             //Gewinner Nachricht ausgeben!
             if (winnerAvaible)
             {
-                String Gewinner = "";
                 if (activePlayer)
                     Gewinner = "O";
                 else
@@ -140,6 +140,14 @@ namespace TTT
 
                 DialogResult winnerRead = MessageBox.Show(this, "Spieler " + Gewinner + " hat das Spiel mit "+spielzug+" Spielzügen gewonnen!", "Gewinner", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 if(winnerRead == DialogResult.OK)
+                {
+                    clearPlayground();
+                    spielzug = 0;
+                }
+            }else if(((!A1.Enabled) && (!A2.Enabled) && (!A3.Enabled)) && ((!B1.Enabled) && (!B2.Enabled) && (!B3.Enabled)) && ((!C1.Enabled) && (!C2.Enabled) && (!C3.Enabled)))
+            {
+                DialogResult winnerRead = MessageBox.Show(this, "Das Spiel ist Unentschieden!", "Unentschieden!", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                if (winnerRead == DialogResult.OK)
                 {
                     clearPlayground();
                     spielzug = 0;
