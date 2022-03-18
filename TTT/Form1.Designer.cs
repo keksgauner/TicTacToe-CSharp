@@ -42,16 +42,17 @@
             this.startToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.NewGameToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ExitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.optionenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.spielerXToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.ColorPickerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
+            this.spielerOToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.SpielerfarbeÄndernToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem3 = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.AboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.GithubToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.optionenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.spielerXToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.spielerOToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.ColorPickerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
-            this.SpielerfarbeÄndernToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem3 = new System.Windows.Forms.ToolStripMenuItem();
+            this.lbl_spielzüge = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -65,6 +66,8 @@
             this.A1.TabIndex = 0;
             this.A1.UseVisualStyleBackColor = false;
             this.A1.Click += new System.EventHandler(this.ButtonClick);
+            this.A1.MouseEnter += new System.EventHandler(this.ButtonEnter);
+            this.A1.MouseLeave += new System.EventHandler(this.ButtonLeave);
             // 
             // A2
             // 
@@ -76,6 +79,8 @@
             this.A2.TabIndex = 1;
             this.A2.UseVisualStyleBackColor = false;
             this.A2.Click += new System.EventHandler(this.ButtonClick);
+            this.A2.MouseEnter += new System.EventHandler(this.ButtonEnter);
+            this.A2.MouseLeave += new System.EventHandler(this.ButtonLeave);
             // 
             // A3
             // 
@@ -87,6 +92,8 @@
             this.A3.TabIndex = 1;
             this.A3.UseVisualStyleBackColor = false;
             this.A3.Click += new System.EventHandler(this.ButtonClick);
+            this.A3.MouseEnter += new System.EventHandler(this.ButtonEnter);
+            this.A3.MouseLeave += new System.EventHandler(this.ButtonLeave);
             // 
             // B1
             // 
@@ -98,6 +105,8 @@
             this.B1.TabIndex = 0;
             this.B1.UseVisualStyleBackColor = false;
             this.B1.Click += new System.EventHandler(this.ButtonClick);
+            this.B1.MouseEnter += new System.EventHandler(this.ButtonEnter);
+            this.B1.MouseLeave += new System.EventHandler(this.ButtonLeave);
             // 
             // B2
             // 
@@ -109,6 +118,8 @@
             this.B2.TabIndex = 1;
             this.B2.UseVisualStyleBackColor = false;
             this.B2.Click += new System.EventHandler(this.ButtonClick);
+            this.B2.MouseEnter += new System.EventHandler(this.ButtonEnter);
+            this.B2.MouseLeave += new System.EventHandler(this.ButtonLeave);
             // 
             // B3
             // 
@@ -120,6 +131,8 @@
             this.B3.TabIndex = 1;
             this.B3.UseVisualStyleBackColor = false;
             this.B3.Click += new System.EventHandler(this.ButtonClick);
+            this.B3.MouseEnter += new System.EventHandler(this.ButtonEnter);
+            this.B3.MouseLeave += new System.EventHandler(this.ButtonLeave);
             // 
             // C1
             // 
@@ -131,6 +144,8 @@
             this.C1.TabIndex = 0;
             this.C1.UseVisualStyleBackColor = false;
             this.C1.Click += new System.EventHandler(this.ButtonClick);
+            this.C1.MouseEnter += new System.EventHandler(this.ButtonEnter);
+            this.C1.MouseLeave += new System.EventHandler(this.ButtonLeave);
             // 
             // C2
             // 
@@ -142,6 +157,8 @@
             this.C2.TabIndex = 1;
             this.C2.UseVisualStyleBackColor = false;
             this.C2.Click += new System.EventHandler(this.ButtonClick);
+            this.C2.MouseEnter += new System.EventHandler(this.ButtonEnter);
+            this.C2.MouseLeave += new System.EventHandler(this.ButtonLeave);
             // 
             // C3
             // 
@@ -153,6 +170,8 @@
             this.C3.TabIndex = 1;
             this.C3.UseVisualStyleBackColor = false;
             this.C3.Click += new System.EventHandler(this.ButtonClick);
+            this.C3.MouseEnter += new System.EventHandler(this.ButtonEnter);
+            this.C3.MouseLeave += new System.EventHandler(this.ButtonLeave);
             // 
             // lbl_player
             // 
@@ -187,39 +206,16 @@
             // NewGameToolStripMenuItem
             // 
             this.NewGameToolStripMenuItem.Name = "NewGameToolStripMenuItem";
-            this.NewGameToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.NewGameToolStripMenuItem.Size = new System.Drawing.Size(132, 22);
             this.NewGameToolStripMenuItem.Text = "New Game";
             this.NewGameToolStripMenuItem.Click += new System.EventHandler(this.NewGameToolStripMenuItem_Click);
             // 
             // ExitToolStripMenuItem
             // 
             this.ExitToolStripMenuItem.Name = "ExitToolStripMenuItem";
-            this.ExitToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.ExitToolStripMenuItem.Size = new System.Drawing.Size(132, 22);
             this.ExitToolStripMenuItem.Text = "Exit";
             this.ExitToolStripMenuItem.Click += new System.EventHandler(this.ExitToolStripMenuItem_Click);
-            // 
-            // helpToolStripMenuItem
-            // 
-            this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.AboutToolStripMenuItem,
-            this.GithubToolStripMenuItem});
-            this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
-            this.helpToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
-            this.helpToolStripMenuItem.Text = "Hilfe";
-            // 
-            // AboutToolStripMenuItem
-            // 
-            this.AboutToolStripMenuItem.Name = "AboutToolStripMenuItem";
-            this.AboutToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.AboutToolStripMenuItem.Text = "About";
-            this.AboutToolStripMenuItem.Click += new System.EventHandler(this.AboutToolStripMenuItem_Click);
-            // 
-            // GithubToolStripMenuItem
-            // 
-            this.GithubToolStripMenuItem.Name = "GithubToolStripMenuItem";
-            this.GithubToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.GithubToolStripMenuItem.Text = "GitHub";
-            this.GithubToolStripMenuItem.Click += new System.EventHandler(this.GithubToolStripMenuItem_Click);
             // 
             // optionenToolStripMenuItem
             // 
@@ -236,8 +232,21 @@
             this.ColorPickerToolStripMenuItem,
             this.toolStripMenuItem2});
             this.spielerXToolStripMenuItem.Name = "spielerXToolStripMenuItem";
-            this.spielerXToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.spielerXToolStripMenuItem.Size = new System.Drawing.Size(121, 22);
             this.spielerXToolStripMenuItem.Text = "Spieler X";
+            // 
+            // ColorPickerToolStripMenuItem
+            // 
+            this.ColorPickerToolStripMenuItem.Name = "ColorPickerToolStripMenuItem";
+            this.ColorPickerToolStripMenuItem.Size = new System.Drawing.Size(176, 22);
+            this.ColorPickerToolStripMenuItem.Text = "Spielerfarbe ändern";
+            this.ColorPickerToolStripMenuItem.Click += new System.EventHandler(this.ColorPickerToolStripMenuItem_Click);
+            // 
+            // toolStripMenuItem2
+            // 
+            this.toolStripMenuItem2.Name = "toolStripMenuItem2";
+            this.toolStripMenuItem2.Size = new System.Drawing.Size(176, 22);
+            this.toolStripMenuItem2.Text = " ";
             // 
             // spielerOToolStripMenuItem
             // 
@@ -245,40 +254,60 @@
             this.SpielerfarbeÄndernToolStripMenuItem,
             this.toolStripMenuItem3});
             this.spielerOToolStripMenuItem.Name = "spielerOToolStripMenuItem";
-            this.spielerOToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.spielerOToolStripMenuItem.Size = new System.Drawing.Size(121, 22);
             this.spielerOToolStripMenuItem.Text = "Spieler O";
-            // 
-            // ColorPickerToolStripMenuItem
-            // 
-            this.ColorPickerToolStripMenuItem.Name = "ColorPickerToolStripMenuItem";
-            this.ColorPickerToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.ColorPickerToolStripMenuItem.Text = "Spielerfarbe ändern";
-            this.ColorPickerToolStripMenuItem.Click += new System.EventHandler(this.ColorPickerToolStripMenuItem_Click);
-            // 
-            // toolStripMenuItem2
-            // 
-            this.toolStripMenuItem2.Name = "toolStripMenuItem2";
-            this.toolStripMenuItem2.Size = new System.Drawing.Size(180, 22);
-            this.toolStripMenuItem2.Text = " ";
             // 
             // SpielerfarbeÄndernToolStripMenuItem
             // 
             this.SpielerfarbeÄndernToolStripMenuItem.Name = "SpielerfarbeÄndernToolStripMenuItem";
-            this.SpielerfarbeÄndernToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.SpielerfarbeÄndernToolStripMenuItem.Size = new System.Drawing.Size(176, 22);
             this.SpielerfarbeÄndernToolStripMenuItem.Text = "Spielerfarbe ändern";
             this.SpielerfarbeÄndernToolStripMenuItem.Click += new System.EventHandler(this.SpielerfarbeÄndernToolStripMenuItem_Click);
             // 
             // toolStripMenuItem3
             // 
             this.toolStripMenuItem3.Name = "toolStripMenuItem3";
-            this.toolStripMenuItem3.Size = new System.Drawing.Size(180, 22);
+            this.toolStripMenuItem3.Size = new System.Drawing.Size(176, 22);
             this.toolStripMenuItem3.Text = " ";
+            // 
+            // helpToolStripMenuItem
+            // 
+            this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.AboutToolStripMenuItem,
+            this.GithubToolStripMenuItem});
+            this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
+            this.helpToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
+            this.helpToolStripMenuItem.Text = "Hilfe";
+            // 
+            // AboutToolStripMenuItem
+            // 
+            this.AboutToolStripMenuItem.Name = "AboutToolStripMenuItem";
+            this.AboutToolStripMenuItem.Size = new System.Drawing.Size(112, 22);
+            this.AboutToolStripMenuItem.Text = "About";
+            this.AboutToolStripMenuItem.Click += new System.EventHandler(this.AboutToolStripMenuItem_Click);
+            // 
+            // GithubToolStripMenuItem
+            // 
+            this.GithubToolStripMenuItem.Name = "GithubToolStripMenuItem";
+            this.GithubToolStripMenuItem.Size = new System.Drawing.Size(112, 22);
+            this.GithubToolStripMenuItem.Text = "GitHub";
+            this.GithubToolStripMenuItem.Click += new System.EventHandler(this.GithubToolStripMenuItem_Click);
+            // 
+            // lbl_spielzüge
+            // 
+            this.lbl_spielzüge.AutoSize = true;
+            this.lbl_spielzüge.Location = new System.Drawing.Point(255, 51);
+            this.lbl_spielzüge.Name = "lbl_spielzüge";
+            this.lbl_spielzüge.Size = new System.Drawing.Size(98, 13);
+            this.lbl_spielzüge.TabIndex = 3;
+            this.lbl_spielzüge.Text = "Spielzüge gespielt: ";
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(445, 273);
+            this.Controls.Add(this.lbl_spielzüge);
             this.Controls.Add(this.lbl_player);
             this.Controls.Add(this.C3);
             this.Controls.Add(this.B3);
@@ -329,6 +358,7 @@
         private System.Windows.Forms.ToolStripMenuItem spielerOToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem SpielerfarbeÄndernToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem3;
+        private System.Windows.Forms.Label lbl_spielzüge;
     }
 }
 

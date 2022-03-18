@@ -1,11 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace TTT
@@ -28,6 +22,9 @@ namespace TTT
         Color playerXColor = new Color();
         Color playerYColor = new Color();
 
+        //Aktive Spielerfarbe
+        Color activePlayerColor = new Color();
+
         public Form1()
         {
             InitializeComponent();
@@ -35,14 +32,13 @@ namespace TTT
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            ClearPlayground();
+            ClearPlayground();  //Spielfeld Initialisieren und Bereitstellen!
         }
 
         private void AboutToolStripMenuItem_Click(object sender, EventArgs e) //Menüpunkt Aktion für Hilfe > About
         {
             // DialogBox mit ausgabe wer das Spiel programmiert hat.
-
-            MessageBox.Show(this, "Dieses Spiel wurde programmiert von:\nSebastian Schindler \nDarkModz-Official\n","About", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            MessageBox.Show(this, "Dieses Spiel wurde programmiert von:\nSebastian Schindler \nDarkModz-Official\n", "About", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         private void GithubToolStripMenuItem_Click(object sender, EventArgs e)  //Menüpunkt Aktion für Hilfe > Github
@@ -61,14 +57,35 @@ namespace TTT
             }
         }
 
+        private void ButtonEnter(object sender, EventArgs e)
+        {
+            Button button = (Button)sender;
+            if (button.Enabled)
+            {
+                ColorActive();
+                button.BackColor = activePlayerColor;
+            }
+        }
+
+        private void ButtonLeave(object sender, EventArgs e)
+        {
+            Button button = (Button)sender;
+            button.BackColor = activePlayerColor;
+            if (button.Text == string.Empty)
+            {
+                button.BackColor = Color.White;
+            }
+        }
+
         private void ButtonClick(object sender, EventArgs e)
         {
             optionenToolStripMenuItem.Enabled = false;
-            spielzug = spielzug++;
+            spielzug++;
+            lbl_spielzüge.Text = "Spielzüge gespielt: " + spielzug.ToString();
             //Erstellen des Buttons als Objekt um auf den verwendeten Button zugreifen zu können. 
 
             Button button = (Button)sender;
-            
+
             if (activePlayer)   //Abfrage welcher Spieler gerade aktiv ist
             {
                 button.Text = "X";  //Button Text ändern zu X da Spieler X Button betätigt hat!
@@ -77,7 +94,7 @@ namespace TTT
             }
             else
             {
-                button.Text="O";    //Button Text ändern zu Y da Spieler Y Button betätigt hat!
+                button.Text = "O";    //Button Text ändern zu Y da Spieler Y Button betätigt hat!
                 button.BackColor = playerYColor;    // Hintergrund zu Spielerfarbe ändern
                 lbl_player.Text = "Spieler X ist nun am Zug!";  //label ändern um bekannt zu geben welcher Spieler am Zug ist
             }
@@ -100,7 +117,8 @@ namespace TTT
             if ((A1.Text == A2.Text) && (A2.Text == A3.Text) && (!A1.Enabled))    //erste Zeile abfragen!
             {
                 winnerAvaible = true;   //Gewinner ist bekannt!
-            }else if ((B1.Text == B2.Text) && (B2.Text == B3.Text) && (!B1.Enabled)) //zweite Zeile abfragen!
+            }
+            else if ((B1.Text == B2.Text) && (B2.Text == B3.Text) && (!B1.Enabled)) //zweite Zeile abfragen!
             {
                 winnerAvaible = true;   //Gewinner ist bekannt!
             }
@@ -110,7 +128,7 @@ namespace TTT
             }
 
             // Vertikale Abfragen
-            
+
             if ((A1.Text == B1.Text) && (B1.Text == C1.Text) && (!A1.Enabled))   //erste Spalte
             {
                 winnerAvaible = true;   //Gewinner ist bekannt!
@@ -118,21 +136,23 @@ namespace TTT
             else if ((A2.Text == B2.Text) && (B2.Text == C2.Text) && (!A2.Enabled)) //zweite Spalte
             {
                 winnerAvaible = true;   //Gewinner ist bekannt!
-            }else if ((A3.Text == B3.Text) && (B3.Text == C3.Text) && (!A3.Enabled))    //dritte Spalte
+            }
+            else if ((A3.Text == B3.Text) && (B3.Text == C3.Text) && (!A3.Enabled))    //dritte Spalte
             {
                 winnerAvaible = true;   //Gewinner ist bekannt!
             }
 
             //Diagonale Abfragen
 
-            if((A1.Text == B2.Text) && (B2.Text == C3.Text) && (!B2.Enabled))   //Diagonal von Oben Links nach unten Rechts!
-            {
-                winnerAvaible = true;   //Gewinner ist bekannt!
-            }else if((A3.Text == B2.Text) && (B2.Text == C1.Text) && (!B2.Enabled)) //Diagonal von Oben Rechts nach unten Links!
+            if ((A1.Text == B2.Text) && (B2.Text == C3.Text) && (!B2.Enabled))   //Diagonal von Oben Links nach unten Rechts!
             {
                 winnerAvaible = true;   //Gewinner ist bekannt!
             }
-            
+            else if ((A3.Text == B2.Text) && (B2.Text == C1.Text) && (!B2.Enabled)) //Diagonal von Oben Rechts nach unten Links!
+            {
+                winnerAvaible = true;   //Gewinner ist bekannt!
+            }
+
 
             //Gewinner Nachricht ausgeben!
             if (winnerAvaible)
@@ -145,13 +165,14 @@ namespace TTT
                 spielzug /= 2;
                 spielzug = Math.Round(spielzug, MidpointRounding.AwayFromZero); //Berechnen wie viele Spielzüge von dem einen Spieler benötigt werden!
 
-                DialogResult winnerRead = MessageBox.Show(this, "Spieler " + Gewinner + " hat das Spiel mit "+spielzug+" Spielzügen gewonnen!", "Gewinner", MessageBoxButtons.OK, MessageBoxIcon.Information);  //Ausgabe der MessageBox
-                if(winnerRead == DialogResult.OK)
+                DialogResult winnerRead = MessageBox.Show(this, "Spieler " + Gewinner + " hat das Spiel mit " + spielzug + " Spielzügen gewonnen!", "Gewinner", MessageBoxButtons.OK, MessageBoxIcon.Information);  //Ausgabe der MessageBox
+                if (winnerRead == DialogResult.OK)
                 {
                     ClearPlayground();  //Spielfeld bereinigen
                     spielzug = 0;   //Spielzüge auf 0 setzen
                 }
-            }else if(((!A1.Enabled) && (!A2.Enabled) && (!A3.Enabled)) && ((!B1.Enabled) && (!B2.Enabled) && (!B3.Enabled)) && ((!C1.Enabled) && (!C2.Enabled) && (!C3.Enabled)))   //Abfragen Ob unentschieden!
+            }
+            else if (((!A1.Enabled) && (!A2.Enabled) && (!A3.Enabled)) && ((!B1.Enabled) && (!B2.Enabled) && (!B3.Enabled)) && ((!C1.Enabled) && (!C2.Enabled) && (!C3.Enabled)))   //Abfragen Ob unentschieden!
             {
                 DialogResult winnerRead = MessageBox.Show(this, "Das Spiel ist Unentschieden!", "Unentschieden!", MessageBoxButtons.OK, MessageBoxIcon.Information);    //MessageBox für Unentschieden ausgeben!
                 if (winnerRead == DialogResult.OK)
@@ -233,6 +254,17 @@ namespace TTT
             Color playerColor = colorDialog.Color;          //Farbe setzen!
             toolStripMenuItem3.BackColor = playerColor;   // Menupunkt einfärben
             playerYColor = playerColor;     //Farbe übergeben
+        }
+
+        private void ColorActive()      //aktive Farbe abfragen!
+        {
+            if (activePlayer)
+            {
+                activePlayerColor = playerXColor;
+            }
+            else
+                activePlayerColor = playerYColor;
+
         }
     }
 }
