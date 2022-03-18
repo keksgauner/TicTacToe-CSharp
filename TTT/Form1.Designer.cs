@@ -40,102 +40,118 @@
             this.lbl_player = new System.Windows.Forms.Label();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.startToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.newGameToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.NewGameToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.ExitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.githubToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.AboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.GithubToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.optionenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.spielerXToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.spielerOToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.ColorPickerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
+            this.SpielerfarbeÄndernToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem3 = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // A1
             // 
+            this.A1.BackColor = System.Drawing.Color.White;
             this.A1.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.A1.Location = new System.Drawing.Point(12, 27);
             this.A1.Name = "A1";
             this.A1.Size = new System.Drawing.Size(75, 75);
             this.A1.TabIndex = 0;
-            this.A1.UseVisualStyleBackColor = true;
+            this.A1.UseVisualStyleBackColor = false;
             this.A1.Click += new System.EventHandler(this.ButtonClick);
             // 
             // A2
             // 
+            this.A2.BackColor = System.Drawing.Color.White;
             this.A2.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.A2.Location = new System.Drawing.Point(93, 27);
             this.A2.Name = "A2";
             this.A2.Size = new System.Drawing.Size(75, 75);
             this.A2.TabIndex = 1;
-            this.A2.UseVisualStyleBackColor = true;
+            this.A2.UseVisualStyleBackColor = false;
             this.A2.Click += new System.EventHandler(this.ButtonClick);
             // 
             // A3
             // 
+            this.A3.BackColor = System.Drawing.Color.White;
             this.A3.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.A3.Location = new System.Drawing.Point(174, 27);
             this.A3.Name = "A3";
             this.A3.Size = new System.Drawing.Size(75, 75);
             this.A3.TabIndex = 1;
-            this.A3.UseVisualStyleBackColor = true;
+            this.A3.UseVisualStyleBackColor = false;
             this.A3.Click += new System.EventHandler(this.ButtonClick);
             // 
             // B1
             // 
+            this.B1.BackColor = System.Drawing.Color.White;
             this.B1.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.B1.Location = new System.Drawing.Point(12, 108);
             this.B1.Name = "B1";
             this.B1.Size = new System.Drawing.Size(75, 75);
             this.B1.TabIndex = 0;
-            this.B1.UseVisualStyleBackColor = true;
+            this.B1.UseVisualStyleBackColor = false;
             this.B1.Click += new System.EventHandler(this.ButtonClick);
             // 
             // B2
             // 
+            this.B2.BackColor = System.Drawing.Color.White;
             this.B2.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.B2.Location = new System.Drawing.Point(93, 108);
             this.B2.Name = "B2";
             this.B2.Size = new System.Drawing.Size(75, 75);
             this.B2.TabIndex = 1;
-            this.B2.UseVisualStyleBackColor = true;
+            this.B2.UseVisualStyleBackColor = false;
             this.B2.Click += new System.EventHandler(this.ButtonClick);
             // 
             // B3
             // 
+            this.B3.BackColor = System.Drawing.Color.White;
             this.B3.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.B3.Location = new System.Drawing.Point(174, 108);
             this.B3.Name = "B3";
             this.B3.Size = new System.Drawing.Size(75, 75);
             this.B3.TabIndex = 1;
-            this.B3.UseVisualStyleBackColor = true;
+            this.B3.UseVisualStyleBackColor = false;
             this.B3.Click += new System.EventHandler(this.ButtonClick);
             // 
             // C1
             // 
+            this.C1.BackColor = System.Drawing.Color.White;
             this.C1.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.C1.Location = new System.Drawing.Point(12, 189);
             this.C1.Name = "C1";
             this.C1.Size = new System.Drawing.Size(75, 75);
             this.C1.TabIndex = 0;
-            this.C1.UseVisualStyleBackColor = true;
+            this.C1.UseVisualStyleBackColor = false;
             this.C1.Click += new System.EventHandler(this.ButtonClick);
             // 
             // C2
             // 
+            this.C2.BackColor = System.Drawing.Color.White;
             this.C2.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.C2.Location = new System.Drawing.Point(93, 189);
             this.C2.Name = "C2";
             this.C2.Size = new System.Drawing.Size(75, 75);
             this.C2.TabIndex = 1;
-            this.C2.UseVisualStyleBackColor = true;
+            this.C2.UseVisualStyleBackColor = false;
             this.C2.Click += new System.EventHandler(this.ButtonClick);
             // 
             // C3
             // 
+            this.C3.BackColor = System.Drawing.Color.White;
             this.C3.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.C3.Location = new System.Drawing.Point(174, 189);
             this.C3.Name = "C3";
             this.C3.Size = new System.Drawing.Size(75, 75);
             this.C3.TabIndex = 1;
-            this.C3.UseVisualStyleBackColor = true;
+            this.C3.UseVisualStyleBackColor = false;
             this.C3.Click += new System.EventHandler(this.ButtonClick);
             // 
             // lbl_player
@@ -151,6 +167,7 @@
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.startToolStripMenuItem,
+            this.optionenToolStripMenuItem,
             this.helpToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
@@ -161,48 +178,101 @@
             // startToolStripMenuItem
             // 
             this.startToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.newGameToolStripMenuItem,
-            this.exitToolStripMenuItem});
+            this.NewGameToolStripMenuItem,
+            this.ExitToolStripMenuItem});
             this.startToolStripMenuItem.Name = "startToolStripMenuItem";
             this.startToolStripMenuItem.Size = new System.Drawing.Size(43, 20);
             this.startToolStripMenuItem.Text = "Start";
             // 
-            // newGameToolStripMenuItem
+            // NewGameToolStripMenuItem
             // 
-            this.newGameToolStripMenuItem.Name = "newGameToolStripMenuItem";
-            this.newGameToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.newGameToolStripMenuItem.Text = "New Game";
-            this.newGameToolStripMenuItem.Click += new System.EventHandler(this.newGameToolStripMenuItem_Click);
+            this.NewGameToolStripMenuItem.Name = "NewGameToolStripMenuItem";
+            this.NewGameToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.NewGameToolStripMenuItem.Text = "New Game";
+            this.NewGameToolStripMenuItem.Click += new System.EventHandler(this.NewGameToolStripMenuItem_Click);
             // 
-            // exitToolStripMenuItem
+            // ExitToolStripMenuItem
             // 
-            this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.exitToolStripMenuItem.Text = "Exit";
-            this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
+            this.ExitToolStripMenuItem.Name = "ExitToolStripMenuItem";
+            this.ExitToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.ExitToolStripMenuItem.Text = "Exit";
+            this.ExitToolStripMenuItem.Click += new System.EventHandler(this.ExitToolStripMenuItem_Click);
             // 
             // helpToolStripMenuItem
             // 
             this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.aboutToolStripMenuItem,
-            this.githubToolStripMenuItem});
+            this.AboutToolStripMenuItem,
+            this.GithubToolStripMenuItem});
             this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
             this.helpToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
             this.helpToolStripMenuItem.Text = "Hilfe";
             // 
-            // aboutToolStripMenuItem
+            // AboutToolStripMenuItem
             // 
-            this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(110, 22);
-            this.aboutToolStripMenuItem.Text = "About";
-            this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
+            this.AboutToolStripMenuItem.Name = "AboutToolStripMenuItem";
+            this.AboutToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.AboutToolStripMenuItem.Text = "About";
+            this.AboutToolStripMenuItem.Click += new System.EventHandler(this.AboutToolStripMenuItem_Click);
             // 
-            // githubToolStripMenuItem
+            // GithubToolStripMenuItem
             // 
-            this.githubToolStripMenuItem.Name = "githubToolStripMenuItem";
-            this.githubToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.githubToolStripMenuItem.Text = "GitHub";
-            this.githubToolStripMenuItem.Click += new System.EventHandler(this.githubToolStripMenuItem_Click);
+            this.GithubToolStripMenuItem.Name = "GithubToolStripMenuItem";
+            this.GithubToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.GithubToolStripMenuItem.Text = "GitHub";
+            this.GithubToolStripMenuItem.Click += new System.EventHandler(this.GithubToolStripMenuItem_Click);
+            // 
+            // optionenToolStripMenuItem
+            // 
+            this.optionenToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.spielerXToolStripMenuItem,
+            this.spielerOToolStripMenuItem});
+            this.optionenToolStripMenuItem.Name = "optionenToolStripMenuItem";
+            this.optionenToolStripMenuItem.Size = new System.Drawing.Size(69, 20);
+            this.optionenToolStripMenuItem.Text = "Optionen";
+            // 
+            // spielerXToolStripMenuItem
+            // 
+            this.spielerXToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.ColorPickerToolStripMenuItem,
+            this.toolStripMenuItem2});
+            this.spielerXToolStripMenuItem.Name = "spielerXToolStripMenuItem";
+            this.spielerXToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.spielerXToolStripMenuItem.Text = "Spieler X";
+            // 
+            // spielerOToolStripMenuItem
+            // 
+            this.spielerOToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.SpielerfarbeÄndernToolStripMenuItem,
+            this.toolStripMenuItem3});
+            this.spielerOToolStripMenuItem.Name = "spielerOToolStripMenuItem";
+            this.spielerOToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.spielerOToolStripMenuItem.Text = "Spieler O";
+            // 
+            // ColorPickerToolStripMenuItem
+            // 
+            this.ColorPickerToolStripMenuItem.Name = "ColorPickerToolStripMenuItem";
+            this.ColorPickerToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.ColorPickerToolStripMenuItem.Text = "Spielerfarbe ändern";
+            this.ColorPickerToolStripMenuItem.Click += new System.EventHandler(this.ColorPickerToolStripMenuItem_Click);
+            // 
+            // toolStripMenuItem2
+            // 
+            this.toolStripMenuItem2.Name = "toolStripMenuItem2";
+            this.toolStripMenuItem2.Size = new System.Drawing.Size(180, 22);
+            this.toolStripMenuItem2.Text = " ";
+            // 
+            // SpielerfarbeÄndernToolStripMenuItem
+            // 
+            this.SpielerfarbeÄndernToolStripMenuItem.Name = "SpielerfarbeÄndernToolStripMenuItem";
+            this.SpielerfarbeÄndernToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.SpielerfarbeÄndernToolStripMenuItem.Text = "Spielerfarbe ändern";
+            this.SpielerfarbeÄndernToolStripMenuItem.Click += new System.EventHandler(this.SpielerfarbeÄndernToolStripMenuItem_Click);
+            // 
+            // toolStripMenuItem3
+            // 
+            this.toolStripMenuItem3.Name = "toolStripMenuItem3";
+            this.toolStripMenuItem3.Size = new System.Drawing.Size(180, 22);
+            this.toolStripMenuItem3.Text = " ";
             // 
             // Form1
             // 
@@ -222,6 +292,7 @@
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "Form1";
+            this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Tic Tac Toe | Sebastian Schindler";
             this.Load += new System.EventHandler(this.Form1_Load);
@@ -246,11 +317,18 @@
         private System.Windows.Forms.Label lbl_player;
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem startToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem newGameToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem NewGameToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem ExitToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem githubToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem AboutToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem GithubToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem optionenToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem spielerXToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem ColorPickerToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem2;
+        private System.Windows.Forms.ToolStripMenuItem spielerOToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem SpielerfarbeÄndernToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem3;
     }
 }
 
