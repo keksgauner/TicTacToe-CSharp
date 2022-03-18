@@ -35,23 +35,23 @@ namespace TTT
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            clearPlayground();
+            ClearPlayground();
         }
 
-        private void aboutToolStripMenuItem_Click(object sender, EventArgs e) //Menüpunkt Aktion für Hilfe > About
+        private void AboutToolStripMenuItem_Click(object sender, EventArgs e) //Menüpunkt Aktion für Hilfe > About
         {
             // DialogBox mit ausgabe wer das Spiel programmiert hat.
 
             MessageBox.Show(this, "Dieses Spiel wurde programmiert von:\nSebastian Schindler \nDarkModz-Official\n","About", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
-        private void githubToolStripMenuItem_Click(object sender, EventArgs e)  //Menüpunkt Aktion für Hilfe > Github
+        private void GithubToolStripMenuItem_Click(object sender, EventArgs e)  //Menüpunkt Aktion für Hilfe > Github
         {
             //Offnet in neuem Browserfenster das Github-Profil von mir.
             System.Diagnostics.Process.Start("https://github.com/DarkModz-Official");
         }
 
-        private void exitToolStripMenuItem_Click(object sender, EventArgs e)    //Menüpunkt Aktion Start > Exit
+        private void ExitToolStripMenuItem_Click(object sender, EventArgs e)    //Menüpunkt Aktion Start > Exit
         {
             //Abfrage Ob das Spiel wirklich beendet werden soll. Wenn ja dann Spiel beenden, ansonsten weiter im Programm. 
             DialogResult exitresult = MessageBox.Show(this, "Möchten Sie das Spiel wirklich beenden?", "Bist du dir WIRKLICH sicher?", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
@@ -64,7 +64,7 @@ namespace TTT
         private void ButtonClick(object sender, EventArgs e)
         {
             optionenToolStripMenuItem.Enabled = false;
-            spielzug = spielzug + 1;
+            spielzug = spielzug++;
             //Erstellen des Buttons als Objekt um auf den verwendeten Button zugreifen zu können. 
 
             Button button = (Button)sender;
@@ -88,10 +88,10 @@ namespace TTT
             //Deaktivieren des Buttons nach Spielzug!
             button.Enabled = false; //Button deaktivieren um erneutes Betätigen zu verhindern!
 
-            winnerCheck();  //Überprüfen ob Spieler gewonnen hat!
+            WinnerCheck();  //Überprüfen ob Spieler gewonnen hat!
         }
 
-        private void winnerCheck()
+        private void WinnerCheck()
         {
             bool winnerAvaible = false; //Sagt aus ob ein Gewinner bekannt ist oder nicht!
 
@@ -142,13 +142,13 @@ namespace TTT
                 else
                     Gewinner = "X";
 
-                spielzug = spielzug / 2;
+                spielzug /= 2;
                 spielzug = Math.Round(spielzug, MidpointRounding.AwayFromZero); //Berechnen wie viele Spielzüge von dem einen Spieler benötigt werden!
 
                 DialogResult winnerRead = MessageBox.Show(this, "Spieler " + Gewinner + " hat das Spiel mit "+spielzug+" Spielzügen gewonnen!", "Gewinner", MessageBoxButtons.OK, MessageBoxIcon.Information);  //Ausgabe der MessageBox
                 if(winnerRead == DialogResult.OK)
                 {
-                    clearPlayground();  //Spielfeld bereinigen
+                    ClearPlayground();  //Spielfeld bereinigen
                     spielzug = 0;   //Spielzüge auf 0 setzen
                 }
             }else if(((!A1.Enabled) && (!A2.Enabled) && (!A3.Enabled)) && ((!B1.Enabled) && (!B2.Enabled) && (!B3.Enabled)) && ((!C1.Enabled) && (!C2.Enabled) && (!C3.Enabled)))   //Abfragen Ob unentschieden!
@@ -156,13 +156,13 @@ namespace TTT
                 DialogResult winnerRead = MessageBox.Show(this, "Das Spiel ist Unentschieden!", "Unentschieden!", MessageBoxButtons.OK, MessageBoxIcon.Information);    //MessageBox für Unentschieden ausgeben!
                 if (winnerRead == DialogResult.OK)
                 {
-                    clearPlayground();  //Spielfeld bereinigen
+                    ClearPlayground();  //Spielfeld bereinigen
                     spielzug = 0;   //Spielzüge auf 0 setzen
                 }
             }
         }
 
-        public void clearPlayground()   //Spielfeld bereinigen
+        public void ClearPlayground()   //Spielfeld bereinigen
         {
             optionenToolStripMenuItem.Enabled = true;
             A1.Text = "";       //Button Text zurücksetzen
@@ -202,18 +202,18 @@ namespace TTT
             C3.BackColor = Color.White;
         }
 
-        private void newGameToolStripMenuItem_Click(object sender, EventArgs e) //Aktion für MenüPunkt Start > New Game
+        private void NewGameToolStripMenuItem_Click(object sender, EventArgs e) //Aktion für MenüPunkt Start > New Game
         {
-            clearPlayground();  //Spielfeld bereinigen
+            ClearPlayground();  //Spielfeld bereinigen
             spielzug = 0;   //Spielzüge zurücksetzen
-            bool activePlayer = false;  //Spieler zurücksetzen!
+            activePlayer = false;  //Spieler zurücksetzen!
             playerXColor = Color.White; //Spielerfarbe zurücksetzen!
             playerYColor = Color.White; //Spielerfarbe zurücksetzen!
             toolStripMenuItem2.BackColor = playerXColor;
             toolStripMenuItem3.BackColor = playerYColor;
         }
 
-        private void colorPickerToolStripMenuItem_Click(object sender, EventArgs e) //Spielerfarbe für Spieler X
+        private void ColorPickerToolStripMenuItem_Click(object sender, EventArgs e) //Spielerfarbe für Spieler X
         {
             ColorDialog colorDialog = new ColorDialog();    //ColorPicker Objekt erstellen
             colorDialog.SolidColorOnly = true;              //Transparenz in Bildern verbieten
@@ -225,7 +225,7 @@ namespace TTT
 
         }
 
-        private void spielerfarbeÄndernToolStripMenuItem_Click(object sender, EventArgs e)  //Spielerfarbe für Spieler Y
+        private void SpielerfarbeÄndernToolStripMenuItem_Click(object sender, EventArgs e)  //Spielerfarbe für Spieler Y
         {
             ColorDialog colorDialog = new ColorDialog();    //ColorPicker Objekt erstellen
             colorDialog.SolidColorOnly = true;              //Transparenz in Bildern verbieten
