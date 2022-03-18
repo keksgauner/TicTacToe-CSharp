@@ -45,97 +45,113 @@
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.githubToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.optionenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.spielerXToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.spielerOToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.colorPickerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
+            this.spielerfarbeÄndernToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem3 = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // A1
             // 
+            this.A1.BackColor = System.Drawing.Color.White;
             this.A1.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.A1.Location = new System.Drawing.Point(12, 27);
             this.A1.Name = "A1";
             this.A1.Size = new System.Drawing.Size(75, 75);
             this.A1.TabIndex = 0;
-            this.A1.UseVisualStyleBackColor = true;
+            this.A1.UseVisualStyleBackColor = false;
             this.A1.Click += new System.EventHandler(this.ButtonClick);
             // 
             // A2
             // 
+            this.A2.BackColor = System.Drawing.Color.White;
             this.A2.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.A2.Location = new System.Drawing.Point(93, 27);
             this.A2.Name = "A2";
             this.A2.Size = new System.Drawing.Size(75, 75);
             this.A2.TabIndex = 1;
-            this.A2.UseVisualStyleBackColor = true;
+            this.A2.UseVisualStyleBackColor = false;
             this.A2.Click += new System.EventHandler(this.ButtonClick);
             // 
             // A3
             // 
+            this.A3.BackColor = System.Drawing.Color.White;
             this.A3.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.A3.Location = new System.Drawing.Point(174, 27);
             this.A3.Name = "A3";
             this.A3.Size = new System.Drawing.Size(75, 75);
             this.A3.TabIndex = 1;
-            this.A3.UseVisualStyleBackColor = true;
+            this.A3.UseVisualStyleBackColor = false;
             this.A3.Click += new System.EventHandler(this.ButtonClick);
             // 
             // B1
             // 
+            this.B1.BackColor = System.Drawing.Color.White;
             this.B1.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.B1.Location = new System.Drawing.Point(12, 108);
             this.B1.Name = "B1";
             this.B1.Size = new System.Drawing.Size(75, 75);
             this.B1.TabIndex = 0;
-            this.B1.UseVisualStyleBackColor = true;
+            this.B1.UseVisualStyleBackColor = false;
             this.B1.Click += new System.EventHandler(this.ButtonClick);
             // 
             // B2
             // 
+            this.B2.BackColor = System.Drawing.Color.White;
             this.B2.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.B2.Location = new System.Drawing.Point(93, 108);
             this.B2.Name = "B2";
             this.B2.Size = new System.Drawing.Size(75, 75);
             this.B2.TabIndex = 1;
-            this.B2.UseVisualStyleBackColor = true;
+            this.B2.UseVisualStyleBackColor = false;
             this.B2.Click += new System.EventHandler(this.ButtonClick);
             // 
             // B3
             // 
+            this.B3.BackColor = System.Drawing.Color.White;
             this.B3.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.B3.Location = new System.Drawing.Point(174, 108);
             this.B3.Name = "B3";
             this.B3.Size = new System.Drawing.Size(75, 75);
             this.B3.TabIndex = 1;
-            this.B3.UseVisualStyleBackColor = true;
+            this.B3.UseVisualStyleBackColor = false;
             this.B3.Click += new System.EventHandler(this.ButtonClick);
             // 
             // C1
             // 
+            this.C1.BackColor = System.Drawing.Color.White;
             this.C1.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.C1.Location = new System.Drawing.Point(12, 189);
             this.C1.Name = "C1";
             this.C1.Size = new System.Drawing.Size(75, 75);
             this.C1.TabIndex = 0;
-            this.C1.UseVisualStyleBackColor = true;
+            this.C1.UseVisualStyleBackColor = false;
             this.C1.Click += new System.EventHandler(this.ButtonClick);
             // 
             // C2
             // 
+            this.C2.BackColor = System.Drawing.Color.White;
             this.C2.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.C2.Location = new System.Drawing.Point(93, 189);
             this.C2.Name = "C2";
             this.C2.Size = new System.Drawing.Size(75, 75);
             this.C2.TabIndex = 1;
-            this.C2.UseVisualStyleBackColor = true;
+            this.C2.UseVisualStyleBackColor = false;
             this.C2.Click += new System.EventHandler(this.ButtonClick);
             // 
             // C3
             // 
+            this.C3.BackColor = System.Drawing.Color.White;
             this.C3.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.C3.Location = new System.Drawing.Point(174, 189);
             this.C3.Name = "C3";
             this.C3.Size = new System.Drawing.Size(75, 75);
             this.C3.TabIndex = 1;
-            this.C3.UseVisualStyleBackColor = true;
+            this.C3.UseVisualStyleBackColor = false;
             this.C3.Click += new System.EventHandler(this.ButtonClick);
             // 
             // lbl_player
@@ -151,7 +167,8 @@
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.startToolStripMenuItem,
-            this.helpToolStripMenuItem});
+            this.helpToolStripMenuItem,
+            this.optionenToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(445, 24);
@@ -193,7 +210,7 @@
             // aboutToolStripMenuItem
             // 
             this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(110, 22);
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.aboutToolStripMenuItem.Text = "About";
             this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
             // 
@@ -203,6 +220,59 @@
             this.githubToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.githubToolStripMenuItem.Text = "GitHub";
             this.githubToolStripMenuItem.Click += new System.EventHandler(this.githubToolStripMenuItem_Click);
+            // 
+            // optionenToolStripMenuItem
+            // 
+            this.optionenToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.spielerXToolStripMenuItem,
+            this.spielerOToolStripMenuItem});
+            this.optionenToolStripMenuItem.Name = "optionenToolStripMenuItem";
+            this.optionenToolStripMenuItem.Size = new System.Drawing.Size(69, 20);
+            this.optionenToolStripMenuItem.Text = "Optionen";
+            // 
+            // spielerXToolStripMenuItem
+            // 
+            this.spielerXToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.colorPickerToolStripMenuItem,
+            this.toolStripMenuItem2});
+            this.spielerXToolStripMenuItem.Name = "spielerXToolStripMenuItem";
+            this.spielerXToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.spielerXToolStripMenuItem.Text = "Spieler X";
+            // 
+            // spielerOToolStripMenuItem
+            // 
+            this.spielerOToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.spielerfarbeÄndernToolStripMenuItem,
+            this.toolStripMenuItem3});
+            this.spielerOToolStripMenuItem.Name = "spielerOToolStripMenuItem";
+            this.spielerOToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.spielerOToolStripMenuItem.Text = "Spieler O";
+            // 
+            // colorPickerToolStripMenuItem
+            // 
+            this.colorPickerToolStripMenuItem.Name = "colorPickerToolStripMenuItem";
+            this.colorPickerToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.colorPickerToolStripMenuItem.Text = "Spielerfarbe ändern";
+            this.colorPickerToolStripMenuItem.Click += new System.EventHandler(this.colorPickerToolStripMenuItem_Click);
+            // 
+            // toolStripMenuItem2
+            // 
+            this.toolStripMenuItem2.Name = "toolStripMenuItem2";
+            this.toolStripMenuItem2.Size = new System.Drawing.Size(180, 22);
+            this.toolStripMenuItem2.Text = " ";
+            // 
+            // spielerfarbeÄndernToolStripMenuItem
+            // 
+            this.spielerfarbeÄndernToolStripMenuItem.Name = "spielerfarbeÄndernToolStripMenuItem";
+            this.spielerfarbeÄndernToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.spielerfarbeÄndernToolStripMenuItem.Text = "Spielerfarbe ändern";
+            this.spielerfarbeÄndernToolStripMenuItem.Click += new System.EventHandler(this.spielerfarbeÄndernToolStripMenuItem_Click);
+            // 
+            // toolStripMenuItem3
+            // 
+            this.toolStripMenuItem3.Name = "toolStripMenuItem3";
+            this.toolStripMenuItem3.Size = new System.Drawing.Size(180, 22);
+            this.toolStripMenuItem3.Text = " ";
             // 
             // Form1
             // 
@@ -251,6 +321,13 @@
         private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem githubToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem optionenToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem spielerXToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem colorPickerToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem2;
+        private System.Windows.Forms.ToolStripMenuItem spielerOToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem spielerfarbeÄndernToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem3;
     }
 }
 
