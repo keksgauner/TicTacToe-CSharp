@@ -108,54 +108,56 @@ namespace TTT
             WinnerCheck();  //Überprüfen ob Spieler gewonnen hat!
         }
 
-        private void WinnerCheck()
+        private bool WinnerAvaible()
         {
-            bool winnerAvaible = false; //Sagt aus ob ein Gewinner bekannt ist oder nicht!
-
             //Horizontale Abfragen
 
             if ((A1.Text == A2.Text) && (A2.Text == A3.Text) && (!A1.Enabled))    //erste Zeile abfragen!
             {
-                winnerAvaible = true;   //Gewinner ist bekannt!
+                return true;   //Gewinner ist bekannt!
             }
             else if ((B1.Text == B2.Text) && (B2.Text == B3.Text) && (!B1.Enabled)) //zweite Zeile abfragen!
             {
-                winnerAvaible = true;   //Gewinner ist bekannt!
+                return true;   //Gewinner ist bekannt!
             }
             else if ((C1.Text == C2.Text) && (C2.Text == C3.Text) && (!C1.Enabled))  //dritte Zeile abfragen!
             {
-                winnerAvaible = true;   //Gewinner ist bekannt!
+                return true;   //Gewinner ist bekannt!
             }
 
             // Vertikale Abfragen
 
             if ((A1.Text == B1.Text) && (B1.Text == C1.Text) && (!A1.Enabled))   //erste Spalte
             {
-                winnerAvaible = true;   //Gewinner ist bekannt!
+                return true;   //Gewinner ist bekannt!
             }
             else if ((A2.Text == B2.Text) && (B2.Text == C2.Text) && (!A2.Enabled)) //zweite Spalte
             {
-                winnerAvaible = true;   //Gewinner ist bekannt!
+                return true;   //Gewinner ist bekannt!
             }
             else if ((A3.Text == B3.Text) && (B3.Text == C3.Text) && (!A3.Enabled))    //dritte Spalte
             {
-                winnerAvaible = true;   //Gewinner ist bekannt!
+                return true;   //Gewinner ist bekannt!
             }
 
             //Diagonale Abfragen
 
             if ((A1.Text == B2.Text) && (B2.Text == C3.Text) && (!B2.Enabled))   //Diagonal von Oben Links nach unten Rechts!
             {
-                winnerAvaible = true;   //Gewinner ist bekannt!
+                return true;   //Gewinner ist bekannt!
             }
             else if ((A3.Text == B2.Text) && (B2.Text == C1.Text) && (!B2.Enabled)) //Diagonal von Oben Rechts nach unten Links!
             {
-                winnerAvaible = true;   //Gewinner ist bekannt!
+                return true;   //Gewinner ist bekannt!
             }
+            return false; //Kein Gewinner ist bekannt!
 
+        }
 
+        private void WinnerCheck()
+        {
             //Gewinner Nachricht ausgeben!
-            if (winnerAvaible)
+            if (WinnerAvaible())
             {
                 if (activePlayer)
                     Gewinner = "O";
