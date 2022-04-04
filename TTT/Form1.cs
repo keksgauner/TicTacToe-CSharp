@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Drawing;
 using System.Windows.Forms;
 
@@ -25,9 +26,13 @@ namespace TTT
         //Aktive Spielerfarbe
         Color activePlayerColor = new Color();
 
+        //Alle Knöpfe
+        ArrayList buttons;
+
         public Form1()
         {
             InitializeComponent();
+            buttons = new ArrayList() { A1, A2, A3, B1, B2, B3, C1, C2, C3 };
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -188,41 +193,12 @@ namespace TTT
         public void ClearPlayground()   //Spielfeld bereinigen
         {
             optionenToolStripMenuItem.Enabled = true;
-            A1.Text = "";       //Button Text zurücksetzen
-            A1.Enabled = true;  //Button wieder enablen!
-            A1.BackColor = Color.White; //Farbe zurücksetzen
-
-            B1.Text = "";
-            B1.Enabled = true;
-            B1.BackColor = Color.White;
-
-            C1.Text = "";
-            C1.Enabled = true;
-            C1.BackColor = Color.White;
-
-            A2.Text = "";
-            A2.Enabled = true;
-            A2.BackColor = Color.White;
-
-            B2.Text = "";
-            B2.Enabled = true;
-            B2.BackColor = Color.White;
-
-            C2.Text = "";
-            C2.Enabled = true;
-            C2.BackColor = Color.White;
-
-            A3.Text = "";
-            A3.Enabled = true;
-            A3.BackColor = Color.White;
-
-            B3.Text = "";
-            B3.Enabled = true;
-            B3.BackColor = Color.White;
-
-            C3.Text = "";
-            C3.Enabled = true;
-            C3.BackColor = Color.White;
+            foreach(Button btn in buttons)
+            {
+                btn.Text = "";       //Button Text zurücksetzen
+                btn.Enabled = true;  //Button wieder enablen!
+                btn.BackColor = Color.White; //Farbe zurücksetzen
+            }
         }
 
         private void NewGameToolStripMenuItem_Click(object sender, EventArgs e) //Aktion für MenüPunkt Start > New Game
