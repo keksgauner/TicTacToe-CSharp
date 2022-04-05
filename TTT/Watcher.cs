@@ -71,6 +71,7 @@ namespace TTT
                     clicked = i;
                 }
             }
+
             // Es darf nicht unter null sein
             if (clicked < 0) throw new IndexOutOfRangeException();
 
@@ -89,14 +90,28 @@ namespace TTT
             UpdateDebug(); //Aktualisert das Debug feld
 
 
-            //Wird richtig hinzugefügt
-            if (!activePlayer)
+            //Soll nur gemacht werdenn wenn es ein neues game ist
+            if ((ConvertStringToNormalString(oldState) == "000000000"))
             {
-                playerOne.Add(clicked, ConvertStringToNormalString(newState));
-            }
-            if(activePlayer)
+                if (!activePlayer)
+                {
+                    playerOne.Add(clicked, ConvertStringToNormalString(oldState));
+                }
+                if (activePlayer)
+                {
+                    playerTwo.Add(clicked, ConvertStringToNormalString(oldState));
+                }
+            } else
             {
-                playerTwo.Add(clicked, ConvertStringToNormalString(newState));
+                //Wird richtig hinzugefügt
+                if (!activePlayer)
+                {
+                    playerOne.Add(clicked, ConvertStringToNormalString(newState));
+                }
+                if (activePlayer)
+                {
+                    playerTwo.Add(clicked, ConvertStringToNormalString(newState));
+                }
             }
         }
 
@@ -111,12 +126,15 @@ namespace TTT
                     string writeText = "whatToDo.Add(\"" + playerOne[id] + "\", " + id + ");\n";  //Erstellen vom gewünschten string
 
                     //Diese logik prüft ob dieser string schon vorhanden ist
+                    bool nothing = true; //Wird auf false gestellt falls es vorhanden ist
                     String[] fileAllSearch = File.ReadAllLines("botstrings.txt");
                     foreach (String fileSearch in fileAllSearch)
                     {
                         if (!(writeText == fileSearch))
-                            File.AppendAllText("botstrings.txt", writeText);  //Es ist noch nicht vorhanden darum wird es hinzugefügt
+                            nothing = false;
                     }
+                    if(nothing)
+                        File.AppendAllText("botstrings.txt", writeText);  //Es ist noch nicht vorhanden darum wird es hinzugefügt
                 }
             }
             //Duplicate code
@@ -128,12 +146,15 @@ namespace TTT
                     string writeText = "whatToDo.Add(\"" + playerOne[id] + "\", " + id + ");\n";  //Erstellen vom gewünschten string
 
                     //Diese logik prüft ob dieser string schon vorhanden ist
+                    bool nothing = true; //Wird auf false gestellt falls es vorhanden ist
                     String[] fileAllSearch = File.ReadAllLines("botstrings.txt");
                     foreach (String fileSearch in fileAllSearch)
                     {
                         if (!(writeText == fileSearch))
-                            File.AppendAllText("botstrings.txt", writeText);  //Es ist noch nicht vorhanden darum wird es hinzugefügt
+                            nothing = false;
                     }
+                    if (nothing)
+                        File.AppendAllText("botstrings.txt", writeText);  //Es ist noch nicht vorhanden darum wird es hinzugefügt
                 }
             }
         }
@@ -174,16 +195,16 @@ namespace TTT
         public void UpdateDebug()
         {
             textBox1.Text = "";
-            textBox1.Text += "Player One: \n";
+            textBox1.Text += Environment.NewLine + "Player One:" + Environment.NewLine;
             foreach (int key in playerOne.Keys)
             {
-                textBox1.Text += "[" + key + " => " + playerOne[key] + "\n";
+                textBox1.Text += "[" + key + " => " + playerOne[key] + Environment.NewLine;
             }
 
-            textBox1.Text += "Player Two: \n";
+            textBox1.Text += Environment.NewLine + "Player Two:" + Environment.NewLine;
             foreach (int key in playerTwo.Keys)
             {
-                textBox1.Text += "[" + key + " => " + playerTwo[key] + "\n";
+                textBox1.Text += "[" + key + " => " + playerTwo[key] + Environment.NewLine;
             }
 
             //Gibt den string im debug feld aus

@@ -175,9 +175,18 @@ namespace TTT
 
         private void WinnerCheck()
         {
+            //Speichere Spielvorgang in Watcher
+            watcher.SaveState(activePlayer);
+
             //Gewinner Nachricht ausgeben!
             if (WinnerAvaible())
             {
+                //Speichert den Spielfortsritt in eine Datei falls Developmentmode an ist
+                if (debugDevelopmentToolStripMenuItem.Checked)
+                {
+                    watcher.SetToData(activePlayer);
+                }
+
                 if (activePlayer)
                     Gewinner = "O";
                 else
@@ -195,6 +204,12 @@ namespace TTT
             }
             else if (((!A1.Enabled) && (!A2.Enabled) && (!A3.Enabled)) && ((!B1.Enabled) && (!B2.Enabled) && (!B3.Enabled)) && ((!C1.Enabled) && (!C2.Enabled) && (!C3.Enabled)))   //Abfragen Ob unentschieden!
             {
+                //Speichert den Spielfortsritt in eine Datei falls Developmentmode an ist
+                if (debugDevelopmentToolStripMenuItem.Checked)
+                {
+                    watcher.SetToData(activePlayer);
+                    watcher.SetToData(!activePlayer);
+                }
 
                 DialogResult winnerRead = MessageBox.Show(this, "Das Spiel ist Unentschieden!", "Unentschieden!", MessageBoxButtons.OK, MessageBoxIcon.Information);    //MessageBox für Unentschieden ausgeben!
                 if (winnerRead == DialogResult.OK)
@@ -206,9 +221,6 @@ namespace TTT
 
             //Bot logik
             if (activePlayer && bot.getEnabled) bot.choose();
-
-            //Speichere Spielvorgang in Watcher
-            watcher.SaveState(activePlayer);
 
         }
 
