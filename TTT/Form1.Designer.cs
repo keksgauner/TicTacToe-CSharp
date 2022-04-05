@@ -63,6 +63,7 @@
             this.debugOutput1 = new System.Windows.Forms.TextBox();
             this.debugClicked = new System.Windows.Forms.Label();
             this.debugOutput2 = new System.Windows.Forms.TextBox();
+            this.debugOutput3 = new System.Windows.Forms.TextBox();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -399,11 +400,22 @@
             this.debugOutput2.TabIndex = 8;
             this.debugOutput2.Visible = false;
             // 
+            // debugOutput3
+            // 
+            this.debugOutput3.Location = new System.Drawing.Point(359, 153);
+            this.debugOutput3.Multiline = true;
+            this.debugOutput3.Name = "debugOutput3";
+            this.debugOutput3.ReadOnly = true;
+            this.debugOutput3.Size = new System.Drawing.Size(79, 20);
+            this.debugOutput3.TabIndex = 9;
+            this.debugOutput3.Visible = false;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(445, 273);
+            this.Controls.Add(this.debugOutput3);
             this.Controls.Add(this.debugOutput2);
             this.Controls.Add(this.debugClicked);
             this.Controls.Add(this.debugOutput1);
@@ -469,6 +481,7 @@
         private System.Windows.Forms.Label debugClicked;
         private System.Windows.Forms.ToolStripMenuItem debugDevelopmentToolStripMenuItem;
         private System.Windows.Forms.TextBox debugOutput2;
+        private System.Windows.Forms.TextBox debugOutput3;
     }
 }
 

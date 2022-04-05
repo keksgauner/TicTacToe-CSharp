@@ -41,7 +41,7 @@ namespace TTT
             //Zugriffe auf Variablen geht erst nach dem Programmstart
             buttons = new ArrayList() { A1, A2, A3, B1, B2, B3, C1, C2, C3 };
             //Ref geht erst nach dem Programmstart
-            watcher = new Watcher(ref buttons, ref debugClicked, ref debugOutput1, ref debugOutput2);
+            watcher = new Watcher(ref buttons, ref debugClicked, ref debugOutput1, ref debugOutput2, ref debugOutput3);
         }
         
 
@@ -214,6 +214,7 @@ namespace TTT
 
         public void ClearPlayground()   //Spielfeld bereinigen
         {
+            watcher.Clear();
             optionenToolStripMenuItem.Enabled = true;
             foreach(Button btn in buttons)
             {
@@ -307,9 +308,9 @@ namespace TTT
         private void debugDevelopmentToolStripMenuItem_CheckedChanged(object sender, EventArgs e)
         {
             if(debugDevelopmentToolStripMenuItem.Checked)
-                debugOutput1.Visible = debugOutput2.Visible = debugClicked.Visible = true;
+                debugOutput1.Visible = debugOutput2.Visible = debugOutput3.Visible = debugClicked.Visible = true;
             else
-                debugOutput1.Visible = debugOutput2.Visible = debugClicked.Visible = false;
+                debugOutput1.Visible = debugOutput2.Visible = debugOutput3.Visible = debugClicked.Visible = false;
         }
     }
 }

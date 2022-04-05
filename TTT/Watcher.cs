@@ -8,24 +8,35 @@ namespace TTT
 {
     public class Watcher
     {
+        int clicked; //Wo etwas geklickt worden ist
+
         ArrayList buttons; // Alle Buttons die existieren
         Label label; // Outputfield für einen einfachen Text
         TextBox textBox1; // Outputfield eins
         TextBox textBox2; // Outputfield zwei
+        TextBox textBox3; // Outputfield drei
 
         String[] newState = new String[9]; //Um Änderungen verarbeiten zu können
         String[] oldState = new String[9]; //Um Änderungen festellen zu können
 
         IDictionary<int, string> playerOne = new Dictionary<int, string>(); //Speichert den ablauf des ersten Spielers
-        IDictionary<int, string> PlayerTwo = new Dictionary<int, string>(); //Speichert den ablauf des zweiten Spielers
+        IDictionary<int, string> playerTwo = new Dictionary<int, string>(); //Speichert den ablauf des zweiten Spielers
 
-        public Watcher(ref ArrayList buttons, ref Label label, ref TextBox textBox1, ref TextBox textBox2)
+        public Watcher(ref ArrayList buttons, ref Label label, ref TextBox textBox1, ref TextBox textBox2, ref TextBox textBox3)
         {
             //Überladen von Objekten aus der Form
             this.buttons = buttons;
             this.label = label;
             this.textBox1 = textBox1;
             this.textBox2 = textBox2;
+            this.textBox3 = textBox3;
+
+            // Fülle inhalt mit 0 damit ein unterschied erkennbar ist
+            for (int i = 0; i < 9; i++)
+            {
+                oldState[i] = "0";
+                newState[i] = "0";
+            }
         }
 
         /**
@@ -47,25 +58,21 @@ namespace TTT
                 if (button.Enabled) currentState[state] = "0";
                 state++;
             }
-
-            //Gibt es im debug feld aus
-            textBox2.Text = ConvertStringToNormalString(currentState);
-
             return currentState;
         }
 
         public int GetClicked()
         {
-            int clicked = 0;
+            int clicked = -1;
             for (int i = 0; i < 9; i++)
             {
-                if (oldState.Length > 0 && oldState[i] != newState[i])
+                if (oldState[i] != newState[i])
                 {
                     clicked = i;
                 }
-                i++;
             }
-            label.Text = clicked.ToString();
+            // Es darf nicht unter null sein
+            if (clicked < 0) throw new IndexOutOfRangeException();
 
             return clicked;
         }
@@ -77,15 +84,19 @@ namespace TTT
         {
             oldState = newState; //Speichert das alte. Es ist dazu da zu berrechnen wo geklickt worden war
             newState = GetState(); //Holt sich die neuen daten
+            clicked = GetClicked(); //Aktualiseirt das geklickte
+
+            UpdateDebug(); //Aktualisert das Debug feld
+
 
             //Wird richtig hinzugefügt
             if (!activePlayer)
             {
-                playerOne.Add(GetClicked(), ConvertStringToNormalString(newState));
+                playerOne.Add(clicked, ConvertStringToNormalString(newState));
             }
             if(activePlayer)
             {
-                PlayerTwo.Add(GetClicked(), ConvertStringToNormalString(newState));
+                playerTwo.Add(clicked, ConvertStringToNormalString(newState));
             }
         }
 
@@ -149,8 +160,38 @@ namespace TTT
             newState = new String[9]; //Um Änderungen verarbeiten zu können
             oldState = new String[9]; //Um Änderungen festellen zu können
 
+            // Fülle inhalt mit 0 damit ein unterschied erkennbar ist
+            for (int i = 0; i < 9; i++)
+            {
+                oldState[i] = "0";
+                newState[i] = "0";
+            }
+
             playerOne = new Dictionary<int, string>(); //Speichert den ablauf des ersten Spielers
-            PlayerTwo = new Dictionary<int, string>(); //Speichert den ablauf des zweiten Spielers
+            playerTwo = new Dictionary<int, string>(); //Speichert den ablauf des zweiten Spielers
+        }
+
+        public void UpdateDebug()
+        {
+            textBox1.Text = "";
+            textBox1.Text += "Player One: \n";
+            foreach (int key in playerOne.Keys)
+            {
+                textBox1.Text += "[" + key + " => " + playerOne[key] + "\n";
+            }
+
+            textBox1.Text += "Player Two: \n";
+            foreach (int key in playerTwo.Keys)
+            {
+                textBox1.Text += "[" + key + " => " + playerTwo[key] + "\n";
+            }
+
+            //Gibt den string im debug feld aus
+            textBox2.Text = ConvertStringToNormalString(oldState);
+            textBox3.Text = ConvertStringToNormalString(newState);
+
+            //Gibt den int im debug label aus
+            label.Text = clicked.ToString();
         }
     }
 }
