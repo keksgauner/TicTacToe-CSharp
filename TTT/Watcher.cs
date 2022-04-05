@@ -130,7 +130,7 @@ namespace TTT
                     String[] fileAllSearch = File.ReadAllLines("botstrings.txt");
                     foreach (String fileSearch in fileAllSearch)
                     {
-                        if (!(writeText == fileSearch))
+                        if (writeText == fileSearch)
                             nothing = false;
                     }
                     if(nothing)
@@ -150,7 +150,7 @@ namespace TTT
                     String[] fileAllSearch = File.ReadAllLines("botstrings.txt");
                     foreach (String fileSearch in fileAllSearch)
                     {
-                        if (!(writeText == fileSearch))
+                        if (writeText == fileSearch)
                             nothing = false;
                     }
                     if (nothing)
