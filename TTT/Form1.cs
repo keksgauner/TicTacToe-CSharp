@@ -29,6 +29,9 @@ namespace TTT
         //Alle Knöpfe
         ArrayList buttons;
 
+        //Botzugriff
+        Bot bot = new Bot();
+
         public Form1()
         {
             InitializeComponent();
@@ -192,6 +195,9 @@ namespace TTT
                     spielzug = 0;   //Spielzüge auf 0 setzen
                 }
             }
+
+            //Bot logik
+            if (activePlayer && bot.getEnabled) bot.choose();
         }
 
         public void ClearPlayground()   //Spielfeld bereinigen
@@ -262,24 +268,28 @@ namespace TTT
         {
             DisableAllBotMenuItems();
             offToolStripMenuItem.Checked = true;
+            bot = new Bot(); // Wenn die übergabe leer ist ist der bot aus
         }
 
         private void easyToolStripMenuItem_Click(object sender, EventArgs e)
         {
             DisableAllBotMenuItems();
             easyToolStripMenuItem.Checked = true;
+            bot = new Bot(buttons, "easy"); // Übergabe wie stark der bot sein soll
         }
 
         private void normalToolStripMenuItem_Click(object sender, EventArgs e)
         {
             DisableAllBotMenuItems();
             normalToolStripMenuItem.Checked = true;
+            //bot = new Bot(buttons, "normal"); // Übergabe wie stark der bot sein soll
         }
 
         private void hardToolStripMenuItem_Click(object sender, EventArgs e)
         {
             DisableAllBotMenuItems();
             hardToolStripMenuItem.Checked = true;
+            //bot = new Bot(buttons, "hard"); // Übergabe wie stark der bot sein soll
         }
     }
 }
