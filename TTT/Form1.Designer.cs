@@ -59,6 +59,7 @@
             this.AboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.GithubToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.lbl_spielzüge = new System.Windows.Forms.Label();
+            this.textBox1 = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -293,7 +294,7 @@
             this.offToolStripMenuItem});
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
             this.toolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
-            this.toolStripMenuItem1.Text = "Bot";
+            this.toolStripMenuItem1.Text = "Computer";
             // 
             // hardToolStripMenuItem
             // 
@@ -357,13 +358,20 @@
             this.lbl_spielzüge.TabIndex = 3;
             this.lbl_spielzüge.Text = "Spielzüge gespielt: ";
             // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(281, 189);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(100, 20);
+            this.textBox1.TabIndex = 6;
+            // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(298, 155);
+            this.label1.Location = new System.Drawing.Point(388, 195);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(35, 13);
-            this.label1.TabIndex = 5;
+            this.label1.TabIndex = 7;
             this.label1.Text = "label1";
             // 
             // Form1
@@ -372,6 +380,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(445, 273);
             this.Controls.Add(this.label1);
+            this.Controls.Add(this.textBox1);
             this.Controls.Add(this.lbl_spielzüge);
             this.Controls.Add(this.lbl_player);
             this.Controls.Add(this.C3);
@@ -424,13 +433,14 @@
         private System.Windows.Forms.ToolStripMenuItem SpielerfarbeÄndernToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem3;
         private System.Windows.Forms.Label lbl_spielzüge;
-        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem hardToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem normalToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem easyToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem offToolStripMenuItem;
+        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.Label label1;
     }
 }
 

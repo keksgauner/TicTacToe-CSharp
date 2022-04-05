@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.Drawing;
+using System.IO;
 using System.Windows.Forms;
 
 namespace TTT
@@ -198,8 +200,71 @@ namespace TTT
 
             //Bot logik
             if (activePlayer && bot.getEnabled) bot.choose();
-        }
 
+            /*
+             * ONLY DEBUG
+             */
+            String[] currentState = new String[9]; //Speichert das aktuelle Spielfeld
+            int ina = 0;
+            foreach (Button button in buttons)
+            {
+             
+                if (button.Text == "X")
+                    currentState[ina] = "2";
+                if (button.Text == "O")
+                    currentState[ina] = "1";
+                if (button.Enabled) currentState[ina] = "0";
+                ina++;
+            }
+            ina = 0;
+            int ineedint = 0;
+            
+            textBox1.Text = currentState[0];
+            for (int i = 1; i < 9; i++)
+            {
+                textBox1.Text += currentState[i];
+                if (oldCurrentState[ina] != currentState[ina])
+                {
+                    ineedint = ina;
+                }
+                ina++;
+            }
+            label1.Text = "" + ineedint;
+            oldCurrentState = currentState;
+            if (WinnerAvaible())
+            {
+                if (activePlayer)
+                {
+                    whatToDos.Add(ineedint, textBox1.Text); SetToData();
+                }
+                else
+                    whatToDos.Clear();
+            }
+            else if (((!A1.Enabled) && (!A2.Enabled) && (!A3.Enabled)) && ((!B1.Enabled) && (!B2.Enabled) && (!B3.Enabled)) && ((!C1.Enabled) && (!C2.Enabled) && (!C3.Enabled)))   //Abfragen Ob unentschieden!
+            { SetToData(); }
+            else if (activePlayer)
+                whatToDos.Add(ineedint, textBox1.Text);
+        }
+        String[] oldCurrentState = new String[9]; //Speichert das aktuelle Spielfeld
+        IDictionary<int, string> whatToDos = new Dictionary<int, string>();
+
+        public void SetToData()
+        {
+            foreach(int id in whatToDos.Keys)
+            {
+                string writeText = "whatToDo.Add(\"" + whatToDos[id] + "\", " + id + ");\n";  // Create a text string
+                String[] vs = File.ReadAllLines("botstrings.txt");
+                foreach (String s in vs)
+                {
+                    if(!(writeText == s))
+                        File.AppendAllText("botstrings.txt", writeText);  // Create a file and write the content of writeText to it
+                }
+            }
+            whatToDos.Clear();
+        }
+        /**
+         * DEBUG END
+         */
         public void ClearPlayground()   //Spielfeld bereinigen
         {
             optionenToolStripMenuItem.Enabled = true;
@@ -282,14 +347,14 @@ namespace TTT
         {
             DisableAllBotMenuItems();
             normalToolStripMenuItem.Checked = true;
-            //bot = new Bot(buttons, "normal"); // Übergabe wie stark der bot sein soll
+            bot = new Bot(buttons, "normal"); // Übergabe wie stark der bot sein soll
         }
 
         private void hardToolStripMenuItem_Click(object sender, EventArgs e)
         {
             DisableAllBotMenuItems();
             hardToolStripMenuItem.Checked = true;
-            //bot = new Bot(buttons, "hard"); // Übergabe wie stark der bot sein soll
+            bot = new Bot(buttons, "hard"); // Übergabe wie stark der bot sein soll
         }
     }
 }
