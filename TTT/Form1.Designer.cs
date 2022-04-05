@@ -427,6 +427,7 @@
             // 
             // debugTimerAutoPlay
             // 
+            this.debugTimerAutoPlay.Interval = 1;
             this.debugTimerAutoPlay.Tick += new System.EventHandler(this.debugTimerAutoPlay_Tick);
             // 
             // Form1

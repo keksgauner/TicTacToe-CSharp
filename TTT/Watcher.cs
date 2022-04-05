@@ -8,6 +8,8 @@ namespace TTT
 {
     public class Watcher
     {
+        bool debug = false;
+
         int clicked; //Wo etwas geklickt worden ist
 
         ArrayList buttons; // Alle Buttons die existieren
@@ -21,9 +23,21 @@ namespace TTT
 
         IDictionary<int, string> playerOne = new Dictionary<int, string>(); //Speichert den ablauf des ersten Spielers
         IDictionary<int, string> playerTwo = new Dictionary<int, string>(); //Speichert den ablauf des zweiten Spielers
+        public Watcher(ref ArrayList buttons)
+        {
+            this.buttons = buttons;
+
+            // Fülle inhalt mit 0 damit ein unterschied erkennbar ist
+            for (int i = 0; i < 9; i++)
+            {
+                oldState[i] = "0";
+                newState[i] = "0";
+            }
+        }
 
         public Watcher(ref ArrayList buttons, ref Label label, ref TextBox textBox1, ref TextBox textBox2, ref TextBox textBox3)
         {
+            debug = true;
             //Überladen von Objekten aus der Form
             this.buttons = buttons;
             this.label = label;
@@ -118,7 +132,7 @@ namespace TTT
         //Boolean activePlayer gibt an wer gewonnen hat!
         public void SetToData(bool activePlayer)
         {
-            if (!activePlayer)
+            if (activePlayer)
             {
                 File.AppendAllText("botstrings.txt", "//Player One\n");
                 foreach (int id in playerOne.Keys)
@@ -130,7 +144,7 @@ namespace TTT
                     String[] fileAllSearch = File.ReadAllLines("botstrings.txt");
                     foreach (String fileSearch in fileAllSearch)
                     {
-                        if (writeText == fileSearch)
+                        if (fileSearch.Contains(playerOne[id]))
                             nothing = false;
                     }
                     if(nothing)
@@ -138,19 +152,19 @@ namespace TTT
                 }
             }
             //Duplicate code
-            if (activePlayer)
+            if (!activePlayer)
             {
                 File.AppendAllText("botstrings.txt", "//Player Two\n");
-                foreach (int id in playerOne.Keys)
+                foreach (int id in playerTwo.Keys)
                 {
-                    string writeText = "whatToDo.Add(\"" + playerOne[id] + "\", " + id + ");\n";  //Erstellen vom gewünschten string
+                    string writeText = "whatToDo.Add(\"" + playerTwo[id] + "\", " + id + ");\n";  //Erstellen vom gewünschten string
 
                     //Diese logik prüft ob dieser string schon vorhanden ist
                     bool nothing = true; //Wird auf false gestellt falls es vorhanden ist
                     String[] fileAllSearch = File.ReadAllLines("botstrings.txt");
                     foreach (String fileSearch in fileAllSearch)
                     {
-                        if (writeText == fileSearch)
+                        if (fileSearch.Contains(playerTwo[id]))
                             nothing = false;
                     }
                     if (nothing)
@@ -194,6 +208,8 @@ namespace TTT
 
         public void UpdateDebug()
         {
+            if (!debug) return; //Falls kein debug nötig ist
+
             textBox1.Text = "";
             textBox1.Text += Environment.NewLine + "Player One:" + Environment.NewLine;
             foreach (int key in playerOne.Keys)

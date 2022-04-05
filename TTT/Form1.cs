@@ -40,7 +40,7 @@ namespace TTT
             InitializeComponent();
             //Zugriffe auf Variablen geht erst nach dem Programmstart
             buttons = new ArrayList() { A1, A2, A3, B1, B2, B3, C1, C2, C3 };
-            bot = new Bot(ref buttons, ref watcher);
+            bot = new Bot(ref buttons);
             //Ref geht erst nach dem Programmstart
             watcher = new Watcher(ref buttons, ref debugClicked, ref debugOutput1, ref debugOutput2, ref debugOutput3);
         }
@@ -253,6 +253,12 @@ namespace TTT
 
         private void NewGameToolStripMenuItem_Click(object sender, EventArgs e) //Aktion für MenüPunkt Start > New Game
         {
+
+            //Reset AI
+            DisableAllBotMenuItems();
+            offToolStripMenuItem.Checked = true;
+            bot.SetMode(""); //Wenn der mode nicht gesetzt wird ist der bot aus
+
             ClearPlayground();  //Spielfeld bereinigen
             spielzug = 0;   //Spielzüge zurücksetzen
             activePlayer = false;  //Spieler zurücksetzen!

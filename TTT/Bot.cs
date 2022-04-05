@@ -15,6 +15,10 @@ namespace TTT
         private bool normal = false; //Speichert ob normalmode genommen worden ist
         private bool hard = false; //Speichert ob hardmode genommen worden ist
 
+
+        private IDictionary<string, int> whatToDo = new Dictionary<string, int>(); //Löst anhand dem currentState String was gemacht werden muss // Je nach key wird gesetzt
+
+
         private ArrayList buttons; //Braucht alle anfunkbaren Knöpfe
 
         private Watcher watcher; //Watcher erlaubt das Spielfeld zu analysieren
@@ -22,10 +26,11 @@ namespace TTT
         public bool getEnabled { get{ return enabled; } } //Von auserhalb sollte darauf nur zugegriffen werden können. Nicht verändert
 
 
-        public Bot(ref ArrayList buttons, ref Watcher watcher)
+        public Bot(ref ArrayList buttons)
         {
             this.buttons = buttons;//Übergabe der Knöpfe in den bot
-            this.watcher = watcher;
+            watcher = new Watcher(ref buttons);
+            SetBotAI();
         }
 
         public void SetMode(String mode)
@@ -96,13 +101,6 @@ namespace TTT
             {
                 String currentState = watcher.GetStateString(); //Speichert das aktuelle Spielfeld
 
-                IDictionary<string, int> whatToDo = new Dictionary<string, int>(); //Löst anhand dem currentState String was gemacht werden muss
-                // Je nach key wird gesetzt
-                whatToDo.Add("000000000", 0);
-
-
-
-
                 try
                 {
                     Button performButton = (Button)buttons[whatToDo[currentState]];
@@ -112,6 +110,101 @@ namespace TTT
                     MessageBox.Show("Valve plz fix! There is no: " + currentState);
                 }
             }
+        }
+        public void SetBotAI()
+        {
+            //Player One
+            whatToDo.Add("210000000", 0);
+            whatToDo.Add("210021000", 4);
+            whatToDo.Add("210021021", 7);
+            whatToDo.Add("212021121", 2);
+            //Player Two
+            whatToDo.Add("000000000", 1);
+            whatToDo.Add("210001000", 5);
+            whatToDo.Add("210021001", 8);
+            whatToDo.Add("210021121", 6);
+            whatToDo.Add("212121121", 3);
+            //Player One
+            whatToDo.Add("020002100", 5);
+            whatToDo.Add("122002100", 2);
+            whatToDo.Add("122022101", 4);
+            //Player One
+            whatToDo.Add("002000210", 6);
+            whatToDo.Add("212000210", 0);
+            whatToDo.Add("212102210", 5);
+            //Player Two
+            whatToDo.Add("000200001", 8);
+            whatToDo.Add("010200201", 1);
+            whatToDo.Add("112200201", 0);
+            whatToDo.Add("112202211", 7);
+            //Player Two
+            whatToDo.Add("000121000", 3);
+            whatToDo.Add("000121012", 7);
+            whatToDo.Add("021121012", 2);
+            //Player One
+            whatToDo.Add("000002100", 5);
+            whatToDo.Add("200012100", 0);
+            whatToDo.Add("210012120", 7);
+            whatToDo.Add("212112120", 2);
+            //Player Two
+            whatToDo.Add("000012100", 4);
+            whatToDo.Add("210012100", 1);
+            whatToDo.Add("210112120", 3);
+            whatToDo.Add("212112121", 8);
+            //Player One
+            whatToDo.Add("020000120", 1);
+            whatToDo.Add("021002120", 5);
+            //Player Two
+            whatToDo.Add("000020001", 8);
+            whatToDo.Add("000020121", 6);
+            //Player Two
+            whatToDo.Add("001001020", 5);
+            whatToDo.Add("101021020", 0);
+            //Player Two
+            whatToDo.Add("100120000", 3);
+            whatToDo.Add("100120012", 7);
+            whatToDo.Add("110120212", 1);
+            //Player One
+            whatToDo.Add("010002000", 5);
+            whatToDo.Add("210012000", 0);
+            whatToDo.Add("210012021", 7);
+            whatToDo.Add("212112021", 2);
+            //Player Two
+            whatToDo.Add("010012000", 4);
+            whatToDo.Add("210012001", 8);
+            whatToDo.Add("210112021", 3);
+            //Player One
+            whatToDo.Add("200001200", 0);
+            whatToDo.Add("212001200", 2);
+            whatToDo.Add("212011220", 7);
+            //Player Two
+            whatToDo.Add("000000120", 6);
+            whatToDo.Add("021000120", 2);
+            whatToDo.Add("221001120", 5);
+            //Player One
+            whatToDo.Add("000010002", 8);
+            whatToDo.Add("002010012", 2);
+            //Player Two
+            whatToDo.Add("002000100", 6);
+            whatToDo.Add("002012100", 4);
+            whatToDo.Add("212012100", 1);
+            //Player One
+            whatToDo.Add("000000210", 6);
+            whatToDo.Add("020001210", 1);
+            whatToDo.Add("120021210", 4);
+            whatToDo.Add("120121212", 8);
+            //Player Two
+            whatToDo.Add("000001210", 5);
+            whatToDo.Add("120001210", 0);
+            whatToDo.Add("120121210", 3);
+            whatToDo.Add("121121212", 2);
+            //Player Two
+            whatToDo.Add("000000102", 6);
+            whatToDo.Add("012000102", 1);
+            //Player One
+            whatToDo.Add("120002100", 1);
+            whatToDo.Add("120202101", 3);
+
         }
 
     }
