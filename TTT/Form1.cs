@@ -30,7 +30,7 @@ namespace TTT
         ArrayList buttons;
 
         //Botzugriff
-        Bot bot = new Bot();
+        Bot bot;
 
         //Watcher erlaubt das Spielfeld zu analysieren
         Watcher watcher;
@@ -40,6 +40,7 @@ namespace TTT
             InitializeComponent();
             //Zugriffe auf Variablen geht erst nach dem Programmstart
             buttons = new ArrayList() { A1, A2, A3, B1, B2, B3, C1, C2, C3 };
+            bot = new Bot(ref buttons, ref watcher);
             //Ref geht erst nach dem Programmstart
             watcher = new Watcher(ref buttons, ref debugClicked, ref debugOutput1, ref debugOutput2, ref debugOutput3);
         }
@@ -195,6 +196,13 @@ namespace TTT
                 spielzug /= 2;
                 spielzug = Math.Round(spielzug, MidpointRounding.AwayFromZero); //Berechnen wie viele Spielzüge von dem einen Spieler benötigt werden!
 
+                if(debugTimerAutoPlay.Enabled) //Kein dialogfeld bei autoplay
+                {
+                    ClearPlayground();  //Spielfeld bereinigen
+                    spielzug = 0;   //Spielzüge auf 0 setzen
+                    return; //Programm abbruch. Weiteres wird nicht benötigt
+                }
+
                 DialogResult winnerRead = MessageBox.Show(this, "Spieler " + Gewinner + " hat das Spiel mit " + spielzug + " Spielzügen gewonnen!", "Gewinner", MessageBoxButtons.OK, MessageBoxIcon.Information);  //Ausgabe der MessageBox
                 if (winnerRead == DialogResult.OK)
                 {
@@ -209,6 +217,13 @@ namespace TTT
                 {
                     watcher.SetToData(activePlayer);
                     watcher.SetToData(!activePlayer);
+                }
+
+                if (debugTimerAutoPlay.Enabled) //Kein dialogfeld bei autoplay
+                {
+                    ClearPlayground();  //Spielfeld bereinigen
+                    spielzug = 0;   //Spielzüge auf 0 setzen
+                    return; //Programm abbruch. Weiteres wird nicht benötigt
                 }
 
                 DialogResult winnerRead = MessageBox.Show(this, "Das Spiel ist Unentschieden!", "Unentschieden!", MessageBoxButtons.OK, MessageBoxIcon.Information);    //MessageBox für Unentschieden ausgeben!
@@ -293,36 +308,48 @@ namespace TTT
         {
             DisableAllBotMenuItems();
             offToolStripMenuItem.Checked = true;
-            bot = new Bot(); // Wenn die übergabe leer ist ist der bot aus
+            bot.SetMode(""); //Wenn der mode nicht gesetzt wird ist der bot aus
         }
 
         private void easyToolStripMenuItem_Click(object sender, EventArgs e)
         {
             DisableAllBotMenuItems();
             easyToolStripMenuItem.Checked = true;
-            bot = new Bot(ref buttons, ref watcher, "easy"); // Übergabe wie stark der bot sein soll
+            bot.SetMode("easy"); //Übergabe wie stark der bot sein soll
         }
 
         private void normalToolStripMenuItem_Click(object sender, EventArgs e)
         {
             DisableAllBotMenuItems();
             normalToolStripMenuItem.Checked = true;
-            bot = new Bot(ref buttons, ref watcher, "normal"); // Übergabe wie stark der bot sein soll
+            bot.SetMode("normal"); //Übergabe wie stark der bot sein soll
         }
 
         private void hardToolStripMenuItem_Click(object sender, EventArgs e)
         {
             DisableAllBotMenuItems();
             hardToolStripMenuItem.Checked = true;
-            bot = new Bot(ref buttons, ref watcher, "hard"); // Übergabe wie stark der bot sein soll
+            bot.SetMode("hard"); //Übergabe wie stark der bot sein soll
         }
 
         private void debugDevelopmentToolStripMenuItem_CheckedChanged(object sender, EventArgs e)
         {
             if(debugDevelopmentToolStripMenuItem.Checked)
-                debugOutput1.Visible = debugOutput2.Visible = debugOutput3.Visible = debugClicked.Visible = true;
+                debugOutput1.Visible = debugOutput2.Visible = debugOutput3.Visible = debugClicked.Visible = debugAutoPlay.Visible = true;
             else
-                debugOutput1.Visible = debugOutput2.Visible = debugOutput3.Visible = debugClicked.Visible = false;
+                debugOutput1.Visible = debugOutput2.Visible = debugOutput3.Visible = debugClicked.Visible = debugAutoPlay.Visible = false;
+        }
+
+        private void debugAutoPlay_CheckedChanged(object sender, EventArgs e)
+        {
+            //Startet das random klicke
+            debugTimerAutoPlay.Enabled = debugAutoPlay.Checked;
+        }
+
+        private void debugTimerAutoPlay_Tick(object sender, EventArgs e)
+        {
+            //Klickt Random
+            bot.RandomClick();
         }
     }
 }

@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.A1 = new System.Windows.Forms.Button();
             this.A2 = new System.Windows.Forms.Button();
             this.A3 = new System.Windows.Forms.Button();
@@ -64,6 +65,8 @@
             this.debugClicked = new System.Windows.Forms.Label();
             this.debugOutput2 = new System.Windows.Forms.TextBox();
             this.debugOutput3 = new System.Windows.Forms.TextBox();
+            this.debugAutoPlay = new System.Windows.Forms.CheckBox();
+            this.debugTimerAutoPlay = new System.Windows.Forms.Timer(this.components);
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -410,11 +413,28 @@
             this.debugOutput3.TabIndex = 9;
             this.debugOutput3.Visible = false;
             // 
+            // debugAutoPlay
+            // 
+            this.debugAutoPlay.AutoSize = true;
+            this.debugAutoPlay.Location = new System.Drawing.Point(359, 189);
+            this.debugAutoPlay.Name = "debugAutoPlay";
+            this.debugAutoPlay.Size = new System.Drawing.Size(66, 17);
+            this.debugAutoPlay.TabIndex = 10;
+            this.debugAutoPlay.Text = "autoplay";
+            this.debugAutoPlay.UseVisualStyleBackColor = true;
+            this.debugAutoPlay.Visible = false;
+            this.debugAutoPlay.CheckedChanged += new System.EventHandler(this.debugAutoPlay_CheckedChanged);
+            // 
+            // debugTimerAutoPlay
+            // 
+            this.debugTimerAutoPlay.Tick += new System.EventHandler(this.debugTimerAutoPlay_Tick);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(445, 273);
+            this.Controls.Add(this.debugAutoPlay);
             this.Controls.Add(this.debugOutput3);
             this.Controls.Add(this.debugOutput2);
             this.Controls.Add(this.debugClicked);
@@ -482,6 +502,8 @@
         private System.Windows.Forms.ToolStripMenuItem debugDevelopmentToolStripMenuItem;
         private System.Windows.Forms.TextBox debugOutput2;
         private System.Windows.Forms.TextBox debugOutput3;
+        private System.Windows.Forms.CheckBox debugAutoPlay;
+        private System.Windows.Forms.Timer debugTimerAutoPlay;
     }
 }
 

@@ -22,20 +22,27 @@ namespace TTT
         public bool getEnabled { get{ return enabled; } } //Von auserhalb sollte darauf nur zugegriffen werden können. Nicht verändert
 
 
-        public Bot()
+        public Bot(ref ArrayList buttons, ref Watcher watcher)
         {
-            //Hier gibt es nichts zu tun.
-        }
-
-        public Bot(ref ArrayList buttons, ref Watcher watcher, String mode)
-        {
-            enabled = true; //Weil ein modus angegeben worden ist. Wird der bot aktiviert
             this.buttons = buttons;//Übergabe der Knöpfe in den bot
             this.watcher = watcher;
+        }
+
+        public void SetMode(String mode)
+        {
+            enabled = true; //Weil ein modus angegeben worden ist. Wird der bot aktiviert
+
+            //Reset von den Schwirigkeitstufen
+            easy = false; //Speichert ob easymode genommen worden ist
+            normal = false; //Speichert ob normalmode genommen worden ist
+            hard = false; //Speichert ob hardmode genommen worden ist
 
             //Setzte das wahr was genutzt werden soll
             switch (mode)
             {
+                case "":
+                    enabled = false;
+                    break;
                 case "easy":
                     easy = true;
                     break;
@@ -49,8 +56,23 @@ namespace TTT
             }
         }
 
+        public void RandomClick()
+        {
+            ArrayList accessibleBtn = new ArrayList();
+            foreach (Button button in buttons)
+            {
+                if (button.Enabled) accessibleBtn.Add(button); //Füge alle Ungenutzten Buttons in eine Arrayliste hinzu
+            }
+
+            Random random = new Random();//Randommizer wird erstellt. Um Random ein button auszuwählen
+            Button clickButton = (Button)accessibleBtn[random.Next(0, accessibleBtn.Count)];
+            clickButton.PerformClick(); //Führt ein Click Event aus
+        }
+
         public void choose()
         {
+            //Bricht ab wenn es nicht aktiviert ist
+            if (!enabled) return;
 
             if(easy)
             {
