@@ -49,10 +49,17 @@
             this.spielerOToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.SpielerfarbeÄndernToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem3 = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.hardToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.normalToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.easyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.offToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.AboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.GithubToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.lbl_spielzüge = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -221,7 +228,9 @@
             // 
             this.optionenToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.spielerXToolStripMenuItem,
-            this.spielerOToolStripMenuItem});
+            this.spielerOToolStripMenuItem,
+            this.toolStripSeparator1,
+            this.toolStripMenuItem1});
             this.optionenToolStripMenuItem.Name = "optionenToolStripMenuItem";
             this.optionenToolStripMenuItem.Size = new System.Drawing.Size(69, 20);
             this.optionenToolStripMenuItem.Text = "Optionen";
@@ -232,7 +241,7 @@
             this.ColorPickerToolStripMenuItem,
             this.toolStripMenuItem2});
             this.spielerXToolStripMenuItem.Name = "spielerXToolStripMenuItem";
-            this.spielerXToolStripMenuItem.Size = new System.Drawing.Size(121, 22);
+            this.spielerXToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.spielerXToolStripMenuItem.Text = "Spieler X";
             // 
             // ColorPickerToolStripMenuItem
@@ -254,7 +263,7 @@
             this.SpielerfarbeÄndernToolStripMenuItem,
             this.toolStripMenuItem3});
             this.spielerOToolStripMenuItem.Name = "spielerOToolStripMenuItem";
-            this.spielerOToolStripMenuItem.Size = new System.Drawing.Size(121, 22);
+            this.spielerOToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.spielerOToolStripMenuItem.Text = "Spieler O";
             // 
             // SpielerfarbeÄndernToolStripMenuItem
@@ -269,6 +278,52 @@
             this.toolStripMenuItem3.Name = "toolStripMenuItem3";
             this.toolStripMenuItem3.Size = new System.Drawing.Size(176, 22);
             this.toolStripMenuItem3.Text = " ";
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(177, 6);
+            // 
+            // toolStripMenuItem1
+            // 
+            this.toolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.hardToolStripMenuItem,
+            this.normalToolStripMenuItem,
+            this.easyToolStripMenuItem,
+            this.offToolStripMenuItem});
+            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
+            this.toolStripMenuItem1.Text = "Bot";
+            // 
+            // hardToolStripMenuItem
+            // 
+            this.hardToolStripMenuItem.Name = "hardToolStripMenuItem";
+            this.hardToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.hardToolStripMenuItem.Text = "Hard";
+            this.hardToolStripMenuItem.Click += new System.EventHandler(this.hardToolStripMenuItem_Click);
+            // 
+            // normalToolStripMenuItem
+            // 
+            this.normalToolStripMenuItem.Name = "normalToolStripMenuItem";
+            this.normalToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.normalToolStripMenuItem.Text = "Normal";
+            this.normalToolStripMenuItem.Click += new System.EventHandler(this.normalToolStripMenuItem_Click);
+            // 
+            // easyToolStripMenuItem
+            // 
+            this.easyToolStripMenuItem.Name = "easyToolStripMenuItem";
+            this.easyToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.easyToolStripMenuItem.Text = "Easy";
+            this.easyToolStripMenuItem.Click += new System.EventHandler(this.easyToolStripMenuItem_Click);
+            // 
+            // offToolStripMenuItem
+            // 
+            this.offToolStripMenuItem.Checked = true;
+            this.offToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.offToolStripMenuItem.Name = "offToolStripMenuItem";
+            this.offToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.offToolStripMenuItem.Text = "Off";
+            this.offToolStripMenuItem.Click += new System.EventHandler(this.offToolStripMenuItem_Click);
             // 
             // helpToolStripMenuItem
             // 
@@ -302,11 +357,21 @@
             this.lbl_spielzüge.TabIndex = 3;
             this.lbl_spielzüge.Text = "Spielzüge gespielt: ";
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(298, 155);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(35, 13);
+            this.label1.TabIndex = 5;
+            this.label1.Text = "label1";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(445, 273);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.lbl_spielzüge);
             this.Controls.Add(this.lbl_player);
             this.Controls.Add(this.C3);
@@ -359,6 +424,13 @@
         private System.Windows.Forms.ToolStripMenuItem SpielerfarbeÄndernToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem3;
         private System.Windows.Forms.Label lbl_spielzüge;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem hardToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem normalToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem easyToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem offToolStripMenuItem;
     }
 }
 

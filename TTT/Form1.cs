@@ -115,6 +115,9 @@ namespace TTT
 
         private bool WinnerAvaible()
         {
+            //Unötige Abfragen vermeiden
+            if(spielzug < 4) return false;
+
             //Horizontale Abfragen
 
             if ((A1.Text == A2.Text) && (A2.Text == A3.Text) && (!A1.Enabled))    //erste Zeile abfragen!
@@ -155,6 +158,7 @@ namespace TTT
             {
                 return true;   //Gewinner ist bekannt!
             }
+
             return false; //Kein Gewinner ist bekannt!
 
         }
@@ -243,6 +247,39 @@ namespace TTT
             else
                 activePlayerColor = playerYColor;
 
+        }
+
+        private void DisableAllBotMenuItems()
+        {
+            offToolStripMenuItem.Checked = false;
+            easyToolStripMenuItem.Checked = false;
+            normalToolStripMenuItem.Checked = false;
+            hardToolStripMenuItem.Checked = false;
+
+        }
+
+        private void offToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            DisableAllBotMenuItems();
+            offToolStripMenuItem.Checked = true;
+        }
+
+        private void easyToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            DisableAllBotMenuItems();
+            easyToolStripMenuItem.Checked = true;
+        }
+
+        private void normalToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            DisableAllBotMenuItems();
+            normalToolStripMenuItem.Checked = true;
+        }
+
+        private void hardToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            DisableAllBotMenuItems();
+            hardToolStripMenuItem.Checked = true;
         }
     }
 }
