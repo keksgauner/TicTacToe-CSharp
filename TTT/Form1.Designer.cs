@@ -55,12 +55,14 @@
             this.normalToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.easyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.offToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.debugDevelopmentToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.AboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.GithubToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.lbl_spielzüge = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
+            this.debugOutput1 = new System.Windows.Forms.TextBox();
+            this.debugClicked = new System.Windows.Forms.Label();
+            this.debugOutput2 = new System.Windows.Forms.TextBox();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -231,7 +233,8 @@
             this.spielerXToolStripMenuItem,
             this.spielerOToolStripMenuItem,
             this.toolStripSeparator1,
-            this.toolStripMenuItem1});
+            this.toolStripMenuItem1,
+            this.debugDevelopmentToolStripMenuItem});
             this.optionenToolStripMenuItem.Name = "optionenToolStripMenuItem";
             this.optionenToolStripMenuItem.Size = new System.Drawing.Size(69, 20);
             this.optionenToolStripMenuItem.Text = "Optionen";
@@ -242,7 +245,7 @@
             this.ColorPickerToolStripMenuItem,
             this.toolStripMenuItem2});
             this.spielerXToolStripMenuItem.Name = "spielerXToolStripMenuItem";
-            this.spielerXToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.spielerXToolStripMenuItem.Size = new System.Drawing.Size(191, 22);
             this.spielerXToolStripMenuItem.Text = "Spieler X";
             // 
             // ColorPickerToolStripMenuItem
@@ -264,7 +267,7 @@
             this.SpielerfarbeÄndernToolStripMenuItem,
             this.toolStripMenuItem3});
             this.spielerOToolStripMenuItem.Name = "spielerOToolStripMenuItem";
-            this.spielerOToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.spielerOToolStripMenuItem.Size = new System.Drawing.Size(191, 22);
             this.spielerOToolStripMenuItem.Text = "Spieler O";
             // 
             // SpielerfarbeÄndernToolStripMenuItem
@@ -283,7 +286,7 @@
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(177, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(188, 6);
             // 
             // toolStripMenuItem1
             // 
@@ -293,27 +296,27 @@
             this.easyToolStripMenuItem,
             this.offToolStripMenuItem});
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(191, 22);
             this.toolStripMenuItem1.Text = "Computer";
             // 
             // hardToolStripMenuItem
             // 
             this.hardToolStripMenuItem.Name = "hardToolStripMenuItem";
-            this.hardToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.hardToolStripMenuItem.Size = new System.Drawing.Size(114, 22);
             this.hardToolStripMenuItem.Text = "Hard";
             this.hardToolStripMenuItem.Click += new System.EventHandler(this.hardToolStripMenuItem_Click);
             // 
             // normalToolStripMenuItem
             // 
             this.normalToolStripMenuItem.Name = "normalToolStripMenuItem";
-            this.normalToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.normalToolStripMenuItem.Size = new System.Drawing.Size(114, 22);
             this.normalToolStripMenuItem.Text = "Normal";
             this.normalToolStripMenuItem.Click += new System.EventHandler(this.normalToolStripMenuItem_Click);
             // 
             // easyToolStripMenuItem
             // 
             this.easyToolStripMenuItem.Name = "easyToolStripMenuItem";
-            this.easyToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.easyToolStripMenuItem.Size = new System.Drawing.Size(114, 22);
             this.easyToolStripMenuItem.Text = "Easy";
             this.easyToolStripMenuItem.Click += new System.EventHandler(this.easyToolStripMenuItem_Click);
             // 
@@ -322,9 +325,17 @@
             this.offToolStripMenuItem.Checked = true;
             this.offToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
             this.offToolStripMenuItem.Name = "offToolStripMenuItem";
-            this.offToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.offToolStripMenuItem.Size = new System.Drawing.Size(114, 22);
             this.offToolStripMenuItem.Text = "Off";
             this.offToolStripMenuItem.Click += new System.EventHandler(this.offToolStripMenuItem_Click);
+            // 
+            // debugDevelopmentToolStripMenuItem
+            // 
+            this.debugDevelopmentToolStripMenuItem.CheckOnClick = true;
+            this.debugDevelopmentToolStripMenuItem.Name = "debugDevelopmentToolStripMenuItem";
+            this.debugDevelopmentToolStripMenuItem.Size = new System.Drawing.Size(191, 22);
+            this.debugDevelopmentToolStripMenuItem.Text = "Debug / Development";
+            this.debugDevelopmentToolStripMenuItem.CheckedChanged += new System.EventHandler(this.debugDevelopmentToolStripMenuItem_CheckedChanged);
             // 
             // helpToolStripMenuItem
             // 
@@ -358,29 +369,44 @@
             this.lbl_spielzüge.TabIndex = 3;
             this.lbl_spielzüge.Text = "Spielzüge gespielt: ";
             // 
-            // textBox1
+            // debugOutput1
             // 
-            this.textBox1.Location = new System.Drawing.Point(281, 189);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(100, 20);
-            this.textBox1.TabIndex = 6;
+            this.debugOutput1.Location = new System.Drawing.Point(258, 108);
+            this.debugOutput1.Multiline = true;
+            this.debugOutput1.Name = "debugOutput1";
+            this.debugOutput1.ReadOnly = true;
+            this.debugOutput1.Size = new System.Drawing.Size(95, 153);
+            this.debugOutput1.TabIndex = 6;
+            this.debugOutput1.Visible = false;
             // 
-            // label1
+            // debugClicked
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(388, 195);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(35, 13);
-            this.label1.TabIndex = 7;
-            this.label1.Text = "label1";
+            this.debugClicked.AutoSize = true;
+            this.debugClicked.Location = new System.Drawing.Point(366, 111);
+            this.debugClicked.Name = "debugClicked";
+            this.debugClicked.Size = new System.Drawing.Size(72, 13);
+            this.debugClicked.TabIndex = 7;
+            this.debugClicked.Text = "debugClicked";
+            this.debugClicked.Visible = false;
+            // 
+            // debugOutput2
+            // 
+            this.debugOutput2.Location = new System.Drawing.Point(359, 127);
+            this.debugOutput2.Multiline = true;
+            this.debugOutput2.Name = "debugOutput2";
+            this.debugOutput2.ReadOnly = true;
+            this.debugOutput2.Size = new System.Drawing.Size(79, 20);
+            this.debugOutput2.TabIndex = 8;
+            this.debugOutput2.Visible = false;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(445, 273);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.debugOutput2);
+            this.Controls.Add(this.debugClicked);
+            this.Controls.Add(this.debugOutput1);
             this.Controls.Add(this.lbl_spielzüge);
             this.Controls.Add(this.lbl_player);
             this.Controls.Add(this.C3);
@@ -439,8 +465,10 @@
         private System.Windows.Forms.ToolStripMenuItem normalToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem easyToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem offToolStripMenuItem;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.TextBox debugOutput1;
+        private System.Windows.Forms.Label debugClicked;
+        private System.Windows.Forms.ToolStripMenuItem debugDevelopmentToolStripMenuItem;
+        private System.Windows.Forms.TextBox debugOutput2;
     }
 }
 

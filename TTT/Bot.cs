@@ -17,6 +17,8 @@ namespace TTT
 
         private ArrayList buttons; //Braucht alle anfunkbaren Knöpfe
 
+        private Watcher watcher; //Watcher erlaubt das Spielfeld zu analysieren
+
         public bool getEnabled { get{ return enabled; } } //Von auserhalb sollte darauf nur zugegriffen werden können. Nicht verändert
 
 
@@ -25,11 +27,13 @@ namespace TTT
             //Hier gibt es nichts zu tun.
         }
 
-        public Bot(ArrayList buttons, String mode)
+        public Bot(ref ArrayList buttons, ref Watcher watcher, String mode)
         {
             enabled = true; //Weil ein modus angegeben worden ist. Wird der bot aktiviert
             this.buttons = buttons;//Übergabe der Knöpfe in den bot
+            this.watcher = watcher;
 
+            //Setzte das wahr was genutzt werden soll
             switch (mode)
             {
                 case "easy":
@@ -68,45 +72,11 @@ namespace TTT
             }
             if (hard)
             {
-                String currentState = ""; //Speichert das aktuelle Spielfeld
-                foreach (Button button in buttons)
-                {
-                    if (!button.Enabled)
-                    {
-                        if (button.Text == "O")
-                            currentState += "1"; //1 wird für Player 1 genutzt
-                        if (button.Text == "X")
-                            currentState += "2"; //2 wird für Player 2 genutzt
-                    }
-
-                    if (button.Enabled) currentState += "0"; //0 wird für Frei genutzt
-                }
+                String currentState = watcher.GetStateString(); //Speichert das aktuelle Spielfeld
 
                 IDictionary<string, int> whatToDo = new Dictionary<string, int>(); //Löst anhand dem currentState String was gemacht werden muss
-                // Listen wenn zuerst gesetzt wird
-                whatToDo.Add("100000000", 0);
-                whatToDo.Add("100000002", 7);
-                whatToDo.Add("101000002", 8);
-                whatToDo.Add("121000002", 8);
-                whatToDo.Add("121000102", 8);
-                whatToDo.Add("121200102", 8);
-                whatToDo.Add("000000000", 7);
-                whatToDo.Add("000000001", 0);
-                whatToDo.Add("200000001", 8);
-                whatToDo.Add("200000101", 8);
-                whatToDo.Add("200200101", 8);
-                whatToDo.Add("200201101", 8);
-                whatToDo.Add("202201101", 8);
-                whatToDo.Add("000000020", 4);
-                whatToDo.Add("000000020", 8);
-                whatToDo.Add("010000020", 8);
-                whatToDo.Add("010002020", 8);
-                whatToDo.Add("010002120", 8);
-                whatToDo.Add("010202120", 8);
-                whatToDo.Add("010212120", 8);
-                whatToDo.Add("010212122", 7);
-                whatToDo.Add("000000020", 7);
-                whatToDo.Add("000000020", 8);
+                // Je nach key wird gesetzt
+                whatToDo.Add("000000000", 0);
 
 
 
