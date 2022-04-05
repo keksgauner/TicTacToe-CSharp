@@ -65,7 +65,7 @@ namespace TTT
                 }
                 i++;
             }
-            label.Text = clicked;
+            label.Text = clicked.ToString();
 
             return clicked;
         }
