@@ -8,6 +8,9 @@ namespace TTT
 {
     public class Watcher
     {
+        static int fail = 0;
+        static int success = 0;
+        
         bool debug = false;
 
         int clicked; //Wo etwas geklickt worden ist
@@ -104,57 +107,48 @@ namespace TTT
             UpdateDebug(); //Aktualisert das Debug feld
 
 
-            //Soll nur gemacht werdenn wenn es ein neues game ist
-            if ((ConvertStringToNormalString(oldState) == "000000000"))
+           //Wird richtig hinzugefügt
+           if (activePlayer)
             {
-                if (!activePlayer)
-                {
-                    playerOne.Add(clicked, ConvertStringToNormalString(oldState));
-                }
-                if (activePlayer)
-                {
-                    playerTwo.Add(clicked, ConvertStringToNormalString(oldState));
-                }
-            } else
-            {
-                //Wird richtig hinzugefügt
-                if (!activePlayer)
-                {
-                    playerOne.Add(clicked, ConvertStringToNormalString(newState));
-                }
-                if (activePlayer)
-                {
-                    playerTwo.Add(clicked, ConvertStringToNormalString(newState));
-                }
-            }
+                playerOne.Add(clicked, ConvertStringToNormalString(oldState));
+           }
+            else
+                playerTwo.Add(clicked, ConvertStringToNormalString(oldState));
+
         }
 
         //Boolean activePlayer gibt an wer gewonnen hat!
         public void SetToData(bool activePlayer)
         {
-            if (activePlayer)
+            //Falls file nicht existiert. Einmal erstellen
+            if(!File.Exists("botstrings.txt"))
+                File.AppendAllText("botstrings.txt", "//Auto generation\n");
+
+            if (!activePlayer)
             {
-                File.AppendAllText("botstrings.txt", "//Player One\n");
-                foreach (int id in playerOne.Keys)
+                foreach (int id in playerTwo.Keys)
                 {
-                    string writeText = "whatToDo.Add(\"" + playerOne[id] + "\", " + id + ");\n";  //Erstellen vom gewünschten string
+                    string writeText = playerTwo[id] + ";" + id + "\n";  //Erstellen vom gewünschten string
 
                     //Diese logik prüft ob dieser string schon vorhanden ist
                     bool nothing = true; //Wird auf false gestellt falls es vorhanden ist
                     String[] fileAllSearch = File.ReadAllLines("botstrings.txt");
                     foreach (String fileSearch in fileAllSearch)
                     {
-                        if (fileSearch.Contains(playerOne[id]))
+                        if (fileSearch.Contains(playerTwo[id]))
                             nothing = false;
                     }
                     if(nothing)
+                    {
+                        success++;
                         File.AppendAllText("botstrings.txt", writeText);  //Es ist noch nicht vorhanden darum wird es hinzugefügt
+                    } else 
+                        fail++;
                 }
             }
             //Duplicate code
-            if (!activePlayer)
+            /*if (activePlayer)
             {
-                File.AppendAllText("botstrings.txt", "//Player Two\n");
                 foreach (int id in playerTwo.Keys)
                 {
                     string writeText = "whatToDo.Add(\"" + playerTwo[id] + "\", " + id + ");\n";  //Erstellen vom gewünschten string
@@ -170,7 +164,7 @@ namespace TTT
                     if (nothing)
                         File.AppendAllText("botstrings.txt", writeText);  //Es ist noch nicht vorhanden darum wird es hinzugefügt
                 }
-            }
+            }*/
         }
 
         public String GetStateString()
@@ -211,16 +205,20 @@ namespace TTT
             if (!debug) return; //Falls kein debug nötig ist
 
             textBox1.Text = "";
+
+            textBox1.Text += "Success/Fail" + Environment.NewLine;
+            textBox1.Text += "" + success + " / " + fail + Environment.NewLine;
+
             textBox1.Text += Environment.NewLine + "Player One:" + Environment.NewLine;
             foreach (int key in playerOne.Keys)
             {
-                textBox1.Text += "[" + key + " => " + playerOne[key] + Environment.NewLine;
+                textBox1.Text += "[" + key + " <= " + playerOne[key] + Environment.NewLine;
             }
 
             textBox1.Text += Environment.NewLine + "Player Two:" + Environment.NewLine;
             foreach (int key in playerTwo.Keys)
             {
-                textBox1.Text += "[" + key + " => " + playerTwo[key] + Environment.NewLine;
+                textBox1.Text += "[" + key + " <= " + playerTwo[key] + Environment.NewLine;
             }
 
             //Gibt den string im debug feld aus

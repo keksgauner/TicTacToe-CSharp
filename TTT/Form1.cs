@@ -215,8 +215,7 @@ namespace TTT
                 //Speichert den Spielfortsritt in eine Datei falls Developmentmode an ist
                 if (debugDevelopmentToolStripMenuItem.Checked)
                 {
-                    watcher.SetToData(activePlayer);
-                    watcher.SetToData(!activePlayer);
+                    watcher.SetToData(false);
                 }
 
                 if (debugTimerAutoPlay.Enabled) //Kein dialogfeld bei autoplay
@@ -249,6 +248,7 @@ namespace TTT
                 btn.Enabled = true;  //Button wieder enablen!
                 btn.BackColor = Color.White; //Farbe zurücksetzen
             }
+            if (activePlayer) bot.choose();
         }
 
         private void NewGameToolStripMenuItem_Click(object sender, EventArgs e) //Aktion für MenüPunkt Start > New Game
@@ -355,7 +355,8 @@ namespace TTT
         private void debugTimerAutoPlay_Tick(object sender, EventArgs e)
         {
             //Klickt Random
-            bot.RandomClick();
+            if(!activePlayer) 
+                bot.RandomClick();
         }
     }
 }
