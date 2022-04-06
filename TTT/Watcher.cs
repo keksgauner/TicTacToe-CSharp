@@ -8,9 +8,11 @@ namespace TTT
 {
     public class Watcher
     {
-        static int fail = 0;
-        static int success = 0;
-        
+        static int fail = 0; //Speichern fehlerhaft
+        static int success = 0; //Speichern erfolgreich
+        static int won = 0; //gewonnen
+        static int loose = 0; //verloren
+
         bool debug = false;
 
         int clicked; //Wo etwas geklickt worden ist
@@ -20,6 +22,8 @@ namespace TTT
         TextBox textBox1; // Outputfield eins
         TextBox textBox2; // Outputfield zwei
         TextBox textBox3; // Outputfield drei
+
+        string additionalText = "";
 
         String[] newState = new String[9]; //Um Änderungen verarbeiten zu können
         String[] oldState = new String[9]; //Um Änderungen festellen zu können
@@ -109,9 +113,7 @@ namespace TTT
 
            //Wird richtig hinzugefügt
            if (activePlayer)
-            {
                 playerOne.Add(clicked, ConvertStringToNormalString(oldState));
-           }
             else
                 playerTwo.Add(clicked, ConvertStringToNormalString(oldState));
 
@@ -126,6 +128,7 @@ namespace TTT
 
             if (!activePlayer)
             {
+                won++;//Only statistic
                 foreach (int id in playerTwo.Keys)
                 {
                     string writeText = playerTwo[id] + ";" + id + "\n";  //Erstellen vom gewünschten string
@@ -138,14 +141,17 @@ namespace TTT
                         if (fileSearch.Contains(playerTwo[id]))
                             nothing = false;
                     }
-                    if(nothing)
+                    if (nothing)
                     {
-                        success++;
+                        success++;//Only statistic
                         File.AppendAllText("botstrings.txt", writeText);  //Es ist noch nicht vorhanden darum wird es hinzugefügt
-                    } else 
-                        fail++;
+                    }
+                    else
+                        fail++;//Only statistic
                 }
             }
+            else
+                loose++;//Only statistic
             //Duplicate code
             /*if (activePlayer)
             {
@@ -206,8 +212,10 @@ namespace TTT
 
             textBox1.Text = "";
 
-            textBox1.Text += "Success/Fail" + Environment.NewLine;
-            textBox1.Text += "" + success + " / " + fail + Environment.NewLine;
+            textBox1.Text += "Success" + success + Environment.NewLine;
+            textBox1.Text += "Fail" + fail + Environment.NewLine;
+            textBox1.Text += "Won" + won + Environment.NewLine;
+            textBox1.Text += "Loose" + loose + Environment.NewLine;
 
             textBox1.Text += Environment.NewLine + "Player One:" + Environment.NewLine;
             foreach (int key in playerOne.Keys)
@@ -226,7 +234,12 @@ namespace TTT
             textBox3.Text = ConvertStringToNormalString(newState);
 
             //Gibt den int im debug label aus
-            label.Text = clicked.ToString();
+            label.Text = additionalText + "/" + clicked.ToString();
+        }
+
+        public void AdditionalText(String outside)
+        {
+            this.additionalText = outside;
         }
     }
 }

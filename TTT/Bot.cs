@@ -27,11 +27,11 @@ namespace TTT
         public bool getEnabled { get{ return enabled; } } //Von auserhalb sollte darauf nur zugegriffen werden können. Nicht verändert
 
 
-        public Bot(ref ArrayList buttons)
+        public Bot(ref ArrayList buttons, ref Watcher watcher)
         {
             this.buttons = buttons;//Übergabe der Knöpfe in den bot
-            watcher = new Watcher(ref buttons);
-            SetBotAI();
+            this.watcher = watcher;//Watcher erlaubt das Spielfeld zu analysieren
+            SetBotAI();//Holt sich die info wie er vorgehen soll.
         }
 
         public void SetMode(String mode)
@@ -76,6 +76,7 @@ namespace TTT
         }
         public void CalcClick()
         {
+            watcher.AdditionalText("Calc");
             String currentState = watcher.GetStateString(); //Speichert das aktuelle Spielfeld
             SetBotAI(); // Only a reload
             try
@@ -85,11 +86,13 @@ namespace TTT
                 else
                 {
                     Button performButton = (Button)buttons[whatToDo[currentState]];
+                    watcher.AdditionalText("Known");
                     performButton.PerformClick(); //Führt ein Click Event aus
                 }
             }
             catch (Exception ex)
             {
+                watcher.AdditionalText("Random");
                 //MessageBox.Show("Valve plz fix! There is no: " + currentState);
                 RandomClick();
             }
