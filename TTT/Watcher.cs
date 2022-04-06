@@ -17,6 +17,7 @@ namespace TTT
         bool debug = false;
 
         int clicked; //Wo etwas geklickt worden ist
+        int spielzug; //Was der letzte spielzug war
 
         ArrayList buttons; // Alle Buttons die existieren
         Label label; // Outputfield für einen einfachen Text
@@ -105,6 +106,8 @@ namespace TTT
         // Spieler 2 entspricht active Player = true
         public void SaveState(bool activePlayer)
         {
+            spielzug++; //Ein spieolzug muss getätigt worden sein
+
             oldState = newState; //Speichert das alte. Es ist dazu da zu berrechnen wo geklickt worden war
             newState = GetState(); //Holt sich die neuen daten
             clicked = GetClicked(); //Aktualiseirt das geklickte
@@ -157,15 +160,22 @@ namespace TTT
             {
                 loose++;//Only statistic wie oft er verliert
 
+                //Bekomme String was zuletzt hinzugefügt worden ist
+                int lastAdded = 0;
+                foreach (int id in playerTwo.Keys)
+                {
+                    lastAdded = id; //Setzt bis zum letzten key neu
+                }
+
                 StringBuilder newStrings = new StringBuilder();
                 // Zeile für Zeile in der Datei durchlaufen
-                foreach (String fileSearch in File.ReadAllLines("botstrings.txt"))
+                foreach (String fileSearch in File.ReadAllLines(fileName))
                 {
                     //String auseinander bauen
                     String[] splitted = fileSearch.Split(';');
                     //Wenn der letzte string gefunden wurde nicht in den Stringbuilder aufnehmen
-                    if (splitted[0] == playerTwo[playerTwo.Count])
-                        newStrings.AppendLine(fileSearch); // Zeile zum StringBuilder hinzufügen
+                    if (splitted[0] == playerTwo[lastAdded]) //Suche nach key
+                        newStrings.AppendLine(fileSearch); //Zeile zum StringBuilder hinzufügen
                 }
 
                 // mit Hilfe des StringBuilder Inhalts, die vorhandene Datei ersetzen
@@ -211,6 +221,8 @@ namespace TTT
 
         public void Clear()
         {
+            spielzug = 0; //Spielzug fängt wieder bei 0 an
+
             //Überschreibt die oben genannten variablen
             newState = new String[9]; //Um Änderungen verarbeiten zu können
             oldState = new String[9]; //Um Änderungen festellen zu können
