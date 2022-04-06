@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using System.Text;
 using System.Windows.Forms;
 
 namespace TTT
@@ -10,8 +11,8 @@ namespace TTT
     {
         static int fail = 0; //Speichern fehlerhaft
         static int success = 0; //Speichern erfolgreich
-        static int won = 0; //gewonnen
-        static int loose = 0; //verloren
+        static int won = 0; //Only statistic wie oft er gewinnt
+        static int loose = 0; //Only statistic wie oft er verliert
 
         bool debug = false;
 
@@ -122,20 +123,22 @@ namespace TTT
         //Boolean activePlayer gibt an wer gewonnen hat!
         public void SetToData(bool activePlayer)
         {
-            //Falls file nicht existiert. Einmal erstellen
-            if(!File.Exists("botstrings.txt"))
-                File.AppendAllText("botstrings.txt", "//Auto generation\n");
+            String fileName = "botstrings.txt";
 
-            if (!activePlayer)
+            //Falls file nicht existiert. Einmal erstellen
+            if (!File.Exists(fileName))
+                File.AppendAllText(fileName, "//Auto generation\n");
+
+            if (!activePlayer) //Wenn der bot gewinnt. Die schritte speichern
             {
-                won++;//Only statistic
+                won++;//Only statistic wie oft er gewinnt
                 foreach (int id in playerTwo.Keys)
                 {
                     string writeText = playerTwo[id] + ";" + id + "\n";  //Erstellen vom gewünschten string
 
                     //Diese logik prüft ob dieser string schon vorhanden ist
                     bool nothing = true; //Wird auf false gestellt falls es vorhanden ist
-                    String[] fileAllSearch = File.ReadAllLines("botstrings.txt");
+                    String[] fileAllSearch = File.ReadAllLines(fileName);
                     foreach (String fileSearch in fileAllSearch)
                     {
                         if (fileSearch.Contains(playerTwo[id]))
@@ -143,15 +146,32 @@ namespace TTT
                     }
                     if (nothing)
                     {
-                        success++;//Only statistic
-                        File.AppendAllText("botstrings.txt", writeText);  //Es ist noch nicht vorhanden darum wird es hinzugefügt
+                        success++;//Only statistic ob er ein neuen weg speichern konnte
+                        File.AppendAllText(fileName, writeText);  //Es ist noch nicht vorhanden darum wird es hinzugefügt
                     }
-                    else
-                        fail++;//Only statistic
+                    else 
+                        fail++;//Only statistic ob er ein weg nicht speichern konnte
                 }
             }
-            else
-                loose++;//Only statistic
+            else //Wenn der bot verliert. Letzten schritt löschen
+            {
+                loose++;//Only statistic wie oft er verliert
+
+                StringBuilder newStrings = new StringBuilder();
+                // Zeile für Zeile in der Datei durchlaufen
+                foreach (String fileSearch in File.ReadAllLines("botstrings.txt"))
+                {
+                    //String auseinander bauen
+                    String[] splitted = fileSearch.Split(';');
+                    //Wenn der letzte string gefunden wurde nicht in den Stringbuilder aufnehmen
+                    if (splitted[0] == playerTwo[playerTwo.Count])
+                        newStrings.AppendLine(fileSearch); // Zeile zum StringBuilder hinzufügen
+                }
+
+                // mit Hilfe des StringBuilder Inhalts, die vorhandene Datei ersetzen
+                File.WriteAllText(fileName, newStrings.ToString(), Encoding.Default);
+
+            }
             //Duplicate code
             /*if (activePlayer)
             {

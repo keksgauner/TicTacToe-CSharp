@@ -132,9 +132,10 @@ namespace TTT
             if (!File.Exists("botstrings.txt"))
                 File.AppendAllText("botstrings.txt", "000000000;0\n");
 
-            String[] fileAllSearch = File.ReadAllLines("botstrings.txt");
-            foreach (String fileSearch in fileAllSearch)
+            // Zeile für Zeile in der Datei durchlaufen
+            foreach (String fileSearch in File.ReadAllLines("botstrings.txt"))
             {
+                //String auseinander bauen
                 String[] splitted = fileSearch.Split(';');
                 whatToDo.Add(splitted[0], Convert.ToInt32(splitted[1]));
             }
