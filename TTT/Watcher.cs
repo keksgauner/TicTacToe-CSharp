@@ -153,6 +153,7 @@ namespace TTT
                     {
                         success++;//Only statistic ob er ein neuen weg speichern konnte
                         File.AppendAllText(fileName, writeText);  //Es ist noch nicht vorhanden darum wird es hinzugefügt
+                        label2.Text = "Speichere " + id + " bei " + playerTwo[id];
                     }
                     else 
                         fail++;//Only statistic ob er ein weg nicht speichern konnte
@@ -179,7 +180,7 @@ namespace TTT
                     if (splitted[0] != playerTwo[lastAdded]) //Suche nach key
                         newStrings.AppendLine(fileSearch); //Zeile zum StringBuilder hinzufügen
                     else
-                        label2.Text = "Lösche " + lastAdded + " also " + playerTwo[lastAdded];
+                        label2.Text = "Lösche " + lastAdded + " bei " + playerTwo[lastAdded];
                 }
 
                 // mit Hilfe des StringBuilder Inhalts, die vorhandene Datei ersetzen
