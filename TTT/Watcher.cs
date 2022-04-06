@@ -9,10 +9,10 @@ namespace TTT
 {
     public class Watcher
     {
-        static int fail = 0; //Speichern fehlerhaft
-        static int success = 0; //Speichern erfolgreich
-        static int won = 0; //Only statistic wie oft er gewinnt
-        static int loose = 0; //Only statistic wie oft er verliert
+        static long fail = 0; //Speichern fehlerhaft
+        static long success = 0; //Speichern erfolgreich
+        static long won = 0; //Only statistic wie oft er gewinnt
+        static long loose = 0; //Only statistic wie oft er verliert
 
         bool debug = false;
 

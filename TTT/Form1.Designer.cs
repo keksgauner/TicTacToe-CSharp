@@ -45,11 +45,7 @@
             this.ExitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.optionenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.spielerXToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.ColorPickerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
             this.spielerOToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.SpielerfarbeÄndernToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem3 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.hardToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -246,47 +242,17 @@
             // 
             // spielerXToolStripMenuItem
             // 
-            this.spielerXToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.ColorPickerToolStripMenuItem,
-            this.toolStripMenuItem2});
             this.spielerXToolStripMenuItem.Name = "spielerXToolStripMenuItem";
             this.spielerXToolStripMenuItem.Size = new System.Drawing.Size(191, 22);
-            this.spielerXToolStripMenuItem.Text = "Spieler X";
-            // 
-            // ColorPickerToolStripMenuItem
-            // 
-            this.ColorPickerToolStripMenuItem.Name = "ColorPickerToolStripMenuItem";
-            this.ColorPickerToolStripMenuItem.Size = new System.Drawing.Size(176, 22);
-            this.ColorPickerToolStripMenuItem.Text = "Spielerfarbe ändern";
-            this.ColorPickerToolStripMenuItem.Click += new System.EventHandler(this.ColorPickerToolStripMenuItem_Click);
-            // 
-            // toolStripMenuItem2
-            // 
-            this.toolStripMenuItem2.Name = "toolStripMenuItem2";
-            this.toolStripMenuItem2.Size = new System.Drawing.Size(176, 22);
-            this.toolStripMenuItem2.Text = " ";
+            this.spielerXToolStripMenuItem.Text = "Spielerfarbe X";
+            this.spielerXToolStripMenuItem.Click += new System.EventHandler(this.spielerXToolStripMenuItem_Click);
             // 
             // spielerOToolStripMenuItem
             // 
-            this.spielerOToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.SpielerfarbeÄndernToolStripMenuItem,
-            this.toolStripMenuItem3});
             this.spielerOToolStripMenuItem.Name = "spielerOToolStripMenuItem";
             this.spielerOToolStripMenuItem.Size = new System.Drawing.Size(191, 22);
-            this.spielerOToolStripMenuItem.Text = "Spieler O";
-            // 
-            // SpielerfarbeÄndernToolStripMenuItem
-            // 
-            this.SpielerfarbeÄndernToolStripMenuItem.Name = "SpielerfarbeÄndernToolStripMenuItem";
-            this.SpielerfarbeÄndernToolStripMenuItem.Size = new System.Drawing.Size(176, 22);
-            this.SpielerfarbeÄndernToolStripMenuItem.Text = "Spielerfarbe ändern";
-            this.SpielerfarbeÄndernToolStripMenuItem.Click += new System.EventHandler(this.SpielerfarbeÄndernToolStripMenuItem_Click);
-            // 
-            // toolStripMenuItem3
-            // 
-            this.toolStripMenuItem3.Name = "toolStripMenuItem3";
-            this.toolStripMenuItem3.Size = new System.Drawing.Size(176, 22);
-            this.toolStripMenuItem3.Text = " ";
+            this.spielerOToolStripMenuItem.Text = "Spielerfarbe O";
+            this.spielerOToolStripMenuItem.Click += new System.EventHandler(this.spielerOToolStripMenuItem_Click);
             // 
             // toolStripSeparator1
             // 
@@ -337,6 +303,7 @@
             // debugDevelopmentToolStripMenuItem
             // 
             this.debugDevelopmentToolStripMenuItem.CheckOnClick = true;
+            this.debugDevelopmentToolStripMenuItem.Enabled = false;
             this.debugDevelopmentToolStripMenuItem.Name = "debugDevelopmentToolStripMenuItem";
             this.debugDevelopmentToolStripMenuItem.Size = new System.Drawing.Size(191, 22);
             this.debugDevelopmentToolStripMenuItem.Text = "Debug / Development";
@@ -428,6 +395,7 @@
             // 
             // debugTimerAutoPlay
             // 
+            this.debugTimerAutoPlay.Interval = 1;
             this.debugTimerAutoPlay.Tick += new System.EventHandler(this.debugTimerAutoPlay_Tick);
             // 
             // debugClicked2
@@ -497,11 +465,7 @@
         private System.Windows.Forms.ToolStripMenuItem GithubToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem optionenToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem spielerXToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem ColorPickerToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem2;
         private System.Windows.Forms.ToolStripMenuItem spielerOToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem SpielerfarbeÄndernToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem3;
         private System.Windows.Forms.Label lbl_spielzüge;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;

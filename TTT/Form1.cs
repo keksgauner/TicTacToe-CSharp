@@ -265,29 +265,28 @@ namespace TTT
             activePlayer = false;  //Spieler zurücksetzen!
             playerXColor = Color.White; //Spielerfarbe zurücksetzen!
             playerYColor = Color.White; //Spielerfarbe zurücksetzen!
-            toolStripMenuItem2.BackColor = playerXColor;
-            toolStripMenuItem3.BackColor = playerYColor;
+            spielerXToolStripMenuItem.BackColor = playerXColor;
+            spielerOToolStripMenuItem.BackColor = playerYColor;
         }
 
-        private void ColorPickerToolStripMenuItem_Click(object sender, EventArgs e) //Spielerfarbe für Spieler X
+
+        private void spielerXToolStripMenuItem_Click(object sender, EventArgs e)
         {
             ColorDialog colorDialog = new ColorDialog();    //ColorPicker Objekt erstellen
             colorDialog.SolidColorOnly = true;              //Transparenz in Bildern verbieten
             colorDialog.ShowDialog();                       //Dialog anzeigen
             Color playerColor = colorDialog.Color;          //Farbe setzen!
-            toolStripMenuItem2.BackColor = playerColor;   // Menupunkt einfärben
+            spielerXToolStripMenuItem.BackColor = playerColor;   // Menupunkt einfärben
             playerXColor = playerColor;     //Farbe übergeben
-
-
         }
 
-        private void SpielerfarbeÄndernToolStripMenuItem_Click(object sender, EventArgs e)  //Spielerfarbe für Spieler Y
+        private void spielerOToolStripMenuItem_Click(object sender, EventArgs e)
         {
             ColorDialog colorDialog = new ColorDialog();    //ColorPicker Objekt erstellen
             colorDialog.SolidColorOnly = true;              //Transparenz in Bildern verbieten
             colorDialog.ShowDialog();                       //Dialog anzeigen
             Color playerColor = colorDialog.Color;          //Farbe setzen!
-            toolStripMenuItem3.BackColor = playerColor;   // Menupunkt einfärben
+            spielerOToolStripMenuItem.BackColor = playerColor;   // Menupunkt einfärben
             playerYColor = playerColor;     //Farbe übergeben
         }
 
@@ -355,9 +354,9 @@ namespace TTT
 
         private void debugTimerAutoPlay_Tick(object sender, EventArgs e)
         {
-            //Klickt Random
+            //Klickt nach der AI tabelle
             if(!activePlayer) 
-                bot.RandomClick();
+                bot.CalcClick();
         }
     }
 }
