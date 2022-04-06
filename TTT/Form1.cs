@@ -41,7 +41,7 @@ namespace TTT
             //Zugriffe auf Variablen geht erst nach dem Programmstart
             buttons = new ArrayList() { A1, A2, A3, B1, B2, B3, C1, C2, C3 };
             //Ref geht erst nach dem Programmstart
-            watcher = new Watcher(ref buttons, ref debugClicked, ref debugOutput1, ref debugOutput2, ref debugOutput3);
+            watcher = new Watcher(ref buttons, ref debugClicked1, ref debugClicked2, ref debugOutput1, ref debugOutput2, ref debugOutput3);
             //Inizialisiere bot AI
             bot = new Bot(ref buttons, ref watcher);
         }
@@ -342,9 +342,9 @@ namespace TTT
         private void debugDevelopmentToolStripMenuItem_CheckedChanged(object sender, EventArgs e)
         {
             if(debugDevelopmentToolStripMenuItem.Checked)
-                debugOutput1.Visible = debugOutput2.Visible = debugOutput3.Visible = debugClicked.Visible = debugAutoPlay.Visible = true;
+                debugOutput1.Visible = debugOutput2.Visible = debugOutput3.Visible = debugClicked1.Visible = debugClicked2.Visible = debugAutoPlay.Visible = true;
             else
-                debugOutput1.Visible = debugOutput2.Visible = debugOutput3.Visible = debugClicked.Visible = debugAutoPlay.Visible = false;
+                debugOutput1.Visible = debugOutput2.Visible = debugOutput3.Visible = debugClicked1.Visible = debugClicked2.Visible = debugAutoPlay.Visible = false;
         }
 
         private void debugAutoPlay_CheckedChanged(object sender, EventArgs e)

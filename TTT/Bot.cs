@@ -85,16 +85,21 @@ namespace TTT
                     RandomClick();
                 else
                 {
-                    Button performButton = (Button)buttons[whatToDo[currentState]];
-                    watcher.AdditionalText("Known");
-                    performButton.PerformClick(); //Führt ein Click Event aus
+                    if(whatToDo.ContainsKey(currentState))
+                    {
+                        Button performButton = (Button)buttons[whatToDo[currentState]]; //Holt sich den button wo er klicken soll
+                        watcher.AdditionalText("Known");
+                        performButton.PerformClick(); //Führt ein Click Event aus
+                    } else
+                    {
+                        watcher.AdditionalText("Random");
+                        RandomClick(); //Der bot kennt es noch nicht also random klicken
+                    }
                 }
             }
             catch (Exception ex)
             {
-                watcher.AdditionalText("Random");
-                //MessageBox.Show("Valve plz fix! There is no: " + currentState);
-                RandomClick();
+                MessageBox.Show("Valve plz fix! There is no: " + currentState + "\n" + ex.Message);
             }
         }
 

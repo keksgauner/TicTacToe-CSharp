@@ -20,7 +20,8 @@ namespace TTT
         int spielzug; //Was der letzte spielzug war
 
         ArrayList buttons; // Alle Buttons die existieren
-        Label label; // Outputfield für einen einfachen Text
+        Label label1; // Outputfield für einen einfachen Text
+        Label label2; // Outputfield für einen einfachen Text wie es dem bot geht
         TextBox textBox1; // Outputfield eins
         TextBox textBox2; // Outputfield zwei
         TextBox textBox3; // Outputfield drei
@@ -44,12 +45,13 @@ namespace TTT
             }
         }
 
-        public Watcher(ref ArrayList buttons, ref Label label, ref TextBox textBox1, ref TextBox textBox2, ref TextBox textBox3)
+        public Watcher(ref ArrayList buttons, ref Label label1, ref Label label2, ref TextBox textBox1, ref TextBox textBox2, ref TextBox textBox3)
         {
             debug = true;
             //Überladen von Objekten aus der Form
             this.buttons = buttons;
-            this.label = label;
+            this.label1 = label1;
+            this.label2 = label2;
             this.textBox1 = textBox1;
             this.textBox2 = textBox2;
             this.textBox3 = textBox3;
@@ -174,33 +176,16 @@ namespace TTT
                     //String auseinander bauen
                     String[] splitted = fileSearch.Split(';');
                     //Wenn der letzte string gefunden wurde nicht in den Stringbuilder aufnehmen
-                    if (splitted[0] == playerTwo[lastAdded]) //Suche nach key
+                    if (splitted[0] != playerTwo[lastAdded]) //Suche nach key
                         newStrings.AppendLine(fileSearch); //Zeile zum StringBuilder hinzufügen
+                    else
+                        label2.Text = "Lösche " + lastAdded + " also " + playerTwo[lastAdded];
                 }
 
                 // mit Hilfe des StringBuilder Inhalts, die vorhandene Datei ersetzen
                 File.WriteAllText(fileName, newStrings.ToString(), Encoding.Default);
 
             }
-            //Duplicate code
-            /*if (activePlayer)
-            {
-                foreach (int id in playerTwo.Keys)
-                {
-                    string writeText = "whatToDo.Add(\"" + playerTwo[id] + "\", " + id + ");\n";  //Erstellen vom gewünschten string
-
-                    //Diese logik prüft ob dieser string schon vorhanden ist
-                    bool nothing = true; //Wird auf false gestellt falls es vorhanden ist
-                    String[] fileAllSearch = File.ReadAllLines("botstrings.txt");
-                    foreach (String fileSearch in fileAllSearch)
-                    {
-                        if (fileSearch.Contains(playerTwo[id]))
-                            nothing = false;
-                    }
-                    if (nothing)
-                        File.AppendAllText("botstrings.txt", writeText);  //Es ist noch nicht vorhanden darum wird es hinzugefügt
-                }
-            }*/
         }
 
         public String GetStateString()
@@ -266,7 +251,7 @@ namespace TTT
             textBox3.Text = ConvertStringToNormalString(newState);
 
             //Gibt den int im debug label aus
-            label.Text = additionalText + "/" + clicked.ToString();
+            label1.Text = additionalText + "/" + clicked.ToString();
         }
 
         public void AdditionalText(String outside)

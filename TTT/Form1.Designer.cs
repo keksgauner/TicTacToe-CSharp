@@ -62,11 +62,12 @@
             this.GithubToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.lbl_spielzüge = new System.Windows.Forms.Label();
             this.debugOutput1 = new System.Windows.Forms.TextBox();
-            this.debugClicked = new System.Windows.Forms.Label();
+            this.debugClicked1 = new System.Windows.Forms.Label();
             this.debugOutput2 = new System.Windows.Forms.TextBox();
             this.debugOutput3 = new System.Windows.Forms.TextBox();
             this.debugAutoPlay = new System.Windows.Forms.CheckBox();
             this.debugTimerAutoPlay = new System.Windows.Forms.Timer(this.components);
+            this.debugClicked2 = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -383,15 +384,15 @@
             this.debugOutput1.TabIndex = 6;
             this.debugOutput1.Visible = false;
             // 
-            // debugClicked
+            // debugClicked1
             // 
-            this.debugClicked.AutoSize = true;
-            this.debugClicked.Location = new System.Drawing.Point(366, 111);
-            this.debugClicked.Name = "debugClicked";
-            this.debugClicked.Size = new System.Drawing.Size(72, 13);
-            this.debugClicked.TabIndex = 7;
-            this.debugClicked.Text = "debugClicked";
-            this.debugClicked.Visible = false;
+            this.debugClicked1.AutoSize = true;
+            this.debugClicked1.Location = new System.Drawing.Point(366, 111);
+            this.debugClicked1.Name = "debugClicked1";
+            this.debugClicked1.Size = new System.Drawing.Size(72, 13);
+            this.debugClicked1.TabIndex = 7;
+            this.debugClicked1.Text = "debugClicked";
+            this.debugClicked1.Visible = false;
             // 
             // debugOutput2
             // 
@@ -429,15 +430,26 @@
             // 
             this.debugTimerAutoPlay.Tick += new System.EventHandler(this.debugTimerAutoPlay_Tick);
             // 
+            // debugClicked2
+            // 
+            this.debugClicked2.AutoSize = true;
+            this.debugClicked2.Location = new System.Drawing.Point(265, 89);
+            this.debugClicked2.Name = "debugClicked2";
+            this.debugClicked2.Size = new System.Drawing.Size(78, 13);
+            this.debugClicked2.TabIndex = 11;
+            this.debugClicked2.Text = "debugClicked2";
+            this.debugClicked2.Visible = false;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(445, 273);
+            this.Controls.Add(this.debugClicked2);
             this.Controls.Add(this.debugAutoPlay);
             this.Controls.Add(this.debugOutput3);
             this.Controls.Add(this.debugOutput2);
-            this.Controls.Add(this.debugClicked);
+            this.Controls.Add(this.debugClicked1);
             this.Controls.Add(this.debugOutput1);
             this.Controls.Add(this.lbl_spielzüge);
             this.Controls.Add(this.lbl_player);
@@ -498,12 +510,13 @@
         private System.Windows.Forms.ToolStripMenuItem easyToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem offToolStripMenuItem;
         private System.Windows.Forms.TextBox debugOutput1;
-        private System.Windows.Forms.Label debugClicked;
+        private System.Windows.Forms.Label debugClicked1;
         private System.Windows.Forms.ToolStripMenuItem debugDevelopmentToolStripMenuItem;
         private System.Windows.Forms.TextBox debugOutput2;
         private System.Windows.Forms.TextBox debugOutput3;
         private System.Windows.Forms.CheckBox debugAutoPlay;
         private System.Windows.Forms.Timer debugTimerAutoPlay;
+        private System.Windows.Forms.Label debugClicked2;
     }
 }
 
