@@ -11,10 +11,16 @@ namespace TTT
     {
         static long fail = 0; //Speichern fehlerhaft
         static long success = 0; //Speichern erfolgreich
-        static long won = 0; //Only statistic wie oft er gewinnt
-        static long loose = 0; //Only statistic wie oft er verliert
+        static long won = 0; //Nur Statistik wie oft er gewinnt
+        static long loose = 0; //Nur Statistik wie oft er verliert
+
+        public bool ActivePlayer { get { return activePlayer; } } //Von auserhalb sollte darauf nur zugegriffen werden können. Nicht verändert
 
         bool debug = false;
+        //Boolean activePlayer gibt an welcher Spieler am zug ist!
+        // Spieler 1 entspricht activePlayer = false
+        // Spieler 2 entspricht active Player = true
+        bool activePlayer = false;
 
         int clicked; //Wo etwas geklickt worden ist
         int spielzug; //Was der letzte spielzug war
@@ -86,6 +92,14 @@ namespace TTT
             return currentState;
         }
 
+        public String GetPlayer(bool activePlayer)
+        {
+            if (activePlayer)
+                return "O";
+            else
+                return "X";
+        }
+
         public int GetClicked()
         {
             int clicked = -1;
@@ -108,6 +122,7 @@ namespace TTT
         // Spieler 2 entspricht active Player = true
         public void SaveState(bool activePlayer)
         {
+            this.activePlayer = activePlayer; //Speicher/Aktualisiere aktuellen Spieler
             spielzug++; //Ein spieolzug muss getätigt worden sein
 
             oldState = newState; //Speichert das alte. Es ist dazu da zu berrechnen wo geklickt worden war
@@ -128,15 +143,16 @@ namespace TTT
         //Boolean activePlayer gibt an wer gewonnen hat!
         public void SetToData(bool activePlayer)
         {
+            this.activePlayer = activePlayer;//Speicher/Aktualisiere aktuellen Spieler
             String fileName = "botstrings.txt";
 
             //Falls file nicht existiert. Einmal erstellen
             if (!File.Exists(fileName))
-                File.AppendAllText(fileName, "//Auto generation\n");
+                File.AppendAllText(fileName, "000000000;0\n");
 
             if (!activePlayer) //Wenn der bot gewinnt. Die schritte speichern
             {
-                won++;//Only statistic wie oft er gewinnt
+                won++;//Nur Statistik wie oft er gewinnt
                 foreach (int id in playerTwo.Keys)
                 {
                     string writeText = playerTwo[id] + ";" + id + "\n";  //Erstellen vom gewünschten string
@@ -151,41 +167,36 @@ namespace TTT
                     }
                     if (nothing)
                     {
-                        success++;//Only statistic ob er ein neuen weg speichern konnte
+                        success++;//Nur Statistik ob er ein neuen weg speichern konnte
                         File.AppendAllText(fileName, writeText);  //Es ist noch nicht vorhanden darum wird es hinzugefügt
                         label2.Text = "Speichere " + id + " bei " + playerTwo[id];
                     }
                     else 
-                        fail++;//Only statistic ob er ein weg nicht speichern konnte
+                        fail++;//Nur Statistik ob er ein weg nicht speichern konnte
                 }
             }
-            else //Wenn der bot verliert. Letzten schritt löschen
+            else //Wenn der bot verliert. Die Letzten schritte löschen
             {
-                loose++;//Only statistic wie oft er verliert
+                loose++;//Nur Statistik wie oft er verliert
 
-                //Bekomme String was zuletzt hinzugefügt worden ist
-                int lastAdded = 0;
+                //Und als strafe den ganzen weg löschen
                 foreach (int id in playerTwo.Keys)
                 {
-                    lastAdded = id; //Setzt bis zum letzten key neu
+                    StringBuilder newStrings = new StringBuilder();
+                    // Zeile für Zeile in der Datei durchlaufen
+                    foreach (String fileSearch in File.ReadAllLines(fileName))
+                    {
+                        //String auseinander bauen
+                        String[] splitted = fileSearch.Split(';');
+                        //Wenn der letzte string gefunden wurde nicht in den Stringbuilder aufnehmen
+                        if (splitted[0] != playerTwo[id]) //Suche nach key
+                            newStrings.AppendLine(fileSearch); //Zeile zum StringBuilder hinzufügen
+                        else
+                            label2.Text = "Lösche " + id + " bei " + playerTwo[id];
+                    }
+                    // mit Hilfe des StringBuilder Inhalts, die vorhandene Datei ersetzen
+                    File.WriteAllText(fileName, newStrings.ToString(), Encoding.Default);
                 }
-
-                StringBuilder newStrings = new StringBuilder();
-                // Zeile für Zeile in der Datei durchlaufen
-                foreach (String fileSearch in File.ReadAllLines(fileName))
-                {
-                    //String auseinander bauen
-                    String[] splitted = fileSearch.Split(';');
-                    //Wenn der letzte string gefunden wurde nicht in den Stringbuilder aufnehmen
-                    if (splitted[0] != playerTwo[lastAdded]) //Suche nach key
-                        newStrings.AppendLine(fileSearch); //Zeile zum StringBuilder hinzufügen
-                    else
-                        label2.Text = "Lösche " + lastAdded + " bei " + playerTwo[lastAdded];
-                }
-
-                // mit Hilfe des StringBuilder Inhalts, die vorhandene Datei ersetzen
-                File.WriteAllText(fileName, newStrings.ToString(), Encoding.Default);
-
             }
         }
 

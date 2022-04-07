@@ -11,6 +11,8 @@ namespace TTT
 {
     internal class Bot
     {
+        public bool Enabled { get { return enabled; } } //Von auserhalb sollte darauf nur zugegriffen werden können. Nicht verändert
+
         private bool enabled = false; //Speichert ob der Bot aktiviert ist
         private bool easy = false; //Speichert ob easymode genommen worden ist
         private bool normal = false; //Speichert ob normalmode genommen worden ist
@@ -23,8 +25,6 @@ namespace TTT
         private ArrayList buttons; //Braucht alle anfunkbaren Knöpfe
 
         private Watcher watcher; //Watcher erlaubt das Spielfeld zu analysieren
-
-        public bool getEnabled { get{ return enabled; } } //Von auserhalb sollte darauf nur zugegriffen werden können. Nicht verändert
 
 
         public Bot(ref ArrayList buttons, ref Watcher watcher)
@@ -64,24 +64,31 @@ namespace TTT
 
         public void RandomClick()
         {
-            ArrayList accessibleBtn = new ArrayList();
-            foreach (Button button in buttons)
+            try
             {
-                if (button.Enabled) accessibleBtn.Add(button); //Füge alle Ungenutzten Buttons in eine Arrayliste hinzu
-            }
+                ArrayList accessibleBtn = new ArrayList();
+                foreach (Button button in buttons)
+                {
+                    if (button.Enabled) accessibleBtn.Add(button); //Füge alle Ungenutzten Buttons in eine Arrayliste hinzu
+                }
 
-            Random random = new Random();//Randommizer wird erstellt. Um Random ein button auszuwählen
-            Button clickButton = (Button)accessibleBtn[random.Next(0, accessibleBtn.Count)];
-            clickButton.PerformClick(); //Führt ein Click Event aus
-        }
+                Random random = new Random();//Randommizer wird erstellt. Um Random ein button auszuwählen
+                Button clickButton = (Button)accessibleBtn[random.Next(0, accessibleBtn.Count)];
+                clickButton.PerformClick(); //Führt ein Click Event aus
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Valve plz fix! Code: #00002\n" + ex.Message);
+            }
+}
         public void CalcClick()
         {
-            watcher.AdditionalText("Calc");
+            watcher.AdditionalText("Dontknow");
             String currentState = watcher.GetStateString(); //Speichert das aktuelle Spielfeld
             SetBotAI(); // Only a reload
             try
             {
-                if (currentState == "000000000")
+                if (false && currentState == "000000000")
                     RandomClick();
                 else
                 {
@@ -92,8 +99,23 @@ namespace TTT
                         performButton.PerformClick(); //Führt ein Click Event aus
                     } else
                     {
+                        //RandomClick(); //Der bot kennt es noch nicht also random klicken
+                        //Horizontale Abfragen
+                        if (ForcePreCalculateKlick(new[] { 0, 1, 2 })) return; //Der Bot muss schauen wo er verlieren könnte
+                        if (ForcePreCalculateKlick(new[] { 3, 4, 5 })) return;
+                        if (ForcePreCalculateKlick(new[] { 6, 7, 8 })) return;
+
+                        //Diagonale Abfragen
+                        if (ForcePreCalculateKlick(new[] { 0, 4, 8 })) return;
+                        if (ForcePreCalculateKlick(new[] { 6, 4, 2 })) return;
+
+                        //Verticale Abfragen
+                        if (ForcePreCalculateKlick(new[] { 0, 3, 6 })) return;
+                        if (ForcePreCalculateKlick(new[] { 1, 4, 7 })) return;
+                        if (ForcePreCalculateKlick(new[] { 2, 5, 8 })) return;
                         watcher.AdditionalText("Random");
-                        RandomClick(); //Der bot kennt es noch nicht also random klicken
+                        RandomClick();
+
                     }
                 }
             }
@@ -103,7 +125,56 @@ namespace TTT
             }
         }
 
-        public void choose()
+        public bool ForcePreCalculateKlick(int[] take) //Nur auf 3 Buttons ausgelegt
+        {
+            //Prüfen ob etwas gesetzt werden kann
+            int isRow = 0; //Ob alle nutzbar sind
+            int isTargetRow = 0; //Wie viele der Gegner hat
+            ArrayList toPress = new ArrayList(); //Was dann getrückt werden soll
+            for (int i = 0; i < 3; i++) //geht das feld durch
+            {
+                Button button = (Button)buttons[take[i]]; //Holt sich den aktuellen button
+                if (button.Enabled || button.Text == watcher.GetPlayer(!watcher.ActivePlayer)) //prüft ob dieser button klickbar oder das eigene ist
+                {
+                    if (button.Enabled) //Nur in die liste aufnehmen wenn es klickbar ist
+                        toPress.Add(button);
+                    isRow++; //Zählt wie viel von start zu stop klickbar oder einem selbst gehört
+                }
+                else
+                    isTargetRow++; //Zählt wie viel von start zu stop nicht klickbar ist
+            }
+            //if(isRow == 3 || isTargetRow == 2 && toPress.Count >= 1)
+            if(isRow == 3 && !(isTargetRow == 2) || isTargetRow == 2 && toPress.Count >= 1)
+            {
+                watcher.AdditionalText("Calc");
+                try
+                {
+                    //Random eins auswählen
+                    Random random = new Random();//Randommizer wird erstellt. Um Random ein button auszuwählen
+                    Button clickButton = (Button)toPress[random.Next(0, toPress.Count)];
+                    clickButton.PerformClick();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Valve plz fix! Code: #00001\n" + ex.Message);
+                }
+                return true;
+            }
+            return false;
+        }
+
+        //Klickt nach der AI tabelle und auch Random
+        public void RandomCalcClick()
+        {
+            Random random = new Random();//Randommizer wird erstellt. Um Random zwischen easy und hard zu weschlsen
+            if (random.Next(0, 10) > 5) RandomClick();//Für ein random kick
+            else
+            {
+                CalcClick(); //Für ein gezielten klick
+            }
+        }
+
+        public void Choose()
         {
             //Bricht ab wenn es nicht aktiviert ist
             if (!enabled) return;
@@ -114,13 +185,7 @@ namespace TTT
             }
             if (normal)
             {
-                Random random = new Random();//Randommizer wird erstellt. Um Random zwischen easy und hard zu weschlsen
-                if(random.Next(0, 10) > 5) RandomClick();//Für ein random kick
-                else
-                {
-                    CalcClick(); //Für ein gezielten klick
-                }
-
+                RandomCalcClick();
             }
             if (hard)
             {

@@ -303,7 +303,7 @@
             // debugDevelopmentToolStripMenuItem
             // 
             this.debugDevelopmentToolStripMenuItem.CheckOnClick = true;
-            this.debugDevelopmentToolStripMenuItem.Enabled = false;
+            this.debugDevelopmentToolStripMenuItem.DoubleClickEnabled = true;
             this.debugDevelopmentToolStripMenuItem.Name = "debugDevelopmentToolStripMenuItem";
             this.debugDevelopmentToolStripMenuItem.Size = new System.Drawing.Size(191, 22);
             this.debugDevelopmentToolStripMenuItem.Text = "Debug / Development";

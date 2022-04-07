@@ -184,7 +184,7 @@ namespace TTT
             if (WinnerAvaible())
             {
                 //Speichert den Spielfortsritt in eine Datei falls Developmentmode an ist
-                if (debugDevelopmentToolStripMenuItem.Checked)
+                if (bot.Enabled)
                 {
                     watcher.SetToData(activePlayer);
                 }
@@ -213,8 +213,8 @@ namespace TTT
             }
             else if (((!A1.Enabled) && (!A2.Enabled) && (!A3.Enabled)) && ((!B1.Enabled) && (!B2.Enabled) && (!B3.Enabled)) && ((!C1.Enabled) && (!C2.Enabled) && (!C3.Enabled)))   //Abfragen Ob unentschieden!
             {
-                //Speichert den Spielfortsritt in eine Datei falls Developmentmode an ist
-                if (debugDevelopmentToolStripMenuItem.Checked)
+                //Speichert den Spielfortsritt der AI in eine Datei
+                if (bot.Enabled)
                 {
                     watcher.SetToData(true);
                 }
@@ -235,7 +235,7 @@ namespace TTT
             }
 
             //Bot logik
-            if (activePlayer && bot.getEnabled) bot.choose();
+            if (activePlayer && bot.Enabled) bot.Choose();
 
         }
 
@@ -249,7 +249,7 @@ namespace TTT
                 btn.Enabled = true;  //Button wieder enablen!
                 btn.BackColor = Color.White; //Farbe zurücksetzen
             }
-            if (activePlayer) bot.choose();
+            if (activePlayer) bot.Choose();
         }
 
         private void NewGameToolStripMenuItem_Click(object sender, EventArgs e) //Aktion für MenüPunkt Start > New Game
@@ -354,9 +354,9 @@ namespace TTT
 
         private void debugTimerAutoPlay_Tick(object sender, EventArgs e)
         {
-            //Klickt nach der AI tabelle
-            if(!activePlayer) 
-                bot.CalcClick();
+            //Klickt Random und auch mit der AI-Tabelle
+            if (!activePlayer)
+                bot.RandomCalcClick();
         }
     }
 }
