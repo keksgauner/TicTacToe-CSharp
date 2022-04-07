@@ -99,23 +99,21 @@ namespace TTT
                         performButton.PerformClick(); //Führt ein Click Event aus
                     } else
                     {
-                        //RandomClick(); //Der bot kennt es noch nicht also random klicken
+                        ArrayList checkQuere = new ArrayList();
                         //Horizontale Abfragen
-                        if (ForcePreCalculateKlick(new[] { 0, 1, 2 })) return; //Der Bot muss schauen wo er verlieren könnte
-                        if (ForcePreCalculateKlick(new[] { 3, 4, 5 })) return;
-                        if (ForcePreCalculateKlick(new[] { 6, 7, 8 })) return;
+                        checkQuere.Add(new[] { 0, 1, 2 });
+                        checkQuere.Add(new[] { 3, 4, 5 });
+                        checkQuere.Add(new[] { 6, 7, 8 });
 
                         //Diagonale Abfragen
-                        if (ForcePreCalculateKlick(new[] { 0, 4, 8 })) return;
-                        if (ForcePreCalculateKlick(new[] { 6, 4, 2 })) return;
+                        checkQuere.Add(new[] { 0, 4, 8 });
+                        checkQuere.Add(new[] { 6, 4, 2 });
 
                         //Verticale Abfragen
-                        if (ForcePreCalculateKlick(new[] { 0, 3, 6 })) return;
-                        if (ForcePreCalculateKlick(new[] { 1, 4, 7 })) return;
-                        if (ForcePreCalculateKlick(new[] { 2, 5, 8 })) return;
-                        watcher.AdditionalText("Random");
-                        RandomClick();
-
+                        checkQuere.Add(new[] { 0, 3, 6 });
+                        checkQuere.Add(new[] { 1, 4, 7 });
+                        checkQuere.Add(new[] { 2, 5, 8 });
+                        ForcePreCalculateKlick(checkQuere);
                     }
                 }
             }
@@ -125,42 +123,74 @@ namespace TTT
             }
         }
 
-        public bool ForcePreCalculateKlick(int[] take) //Nur auf 3 Buttons ausgelegt
+        public void ForcePreCalculateKlick(ArrayList checkQuere) //Nur auf 3 Buttons ausgelegt
         {
-            //Prüfen ob etwas gesetzt werden kann
-            int isRow = 0; //Ob alle nutzbar sind
-            int isTargetRow = 0; //Wie viele der Gegner hat
-            ArrayList toPress = new ArrayList(); //Was dann getrückt werden soll
-            for (int i = 0; i < 3; i++) //geht das feld durch
+            bool defent = false;
+            ArrayList toPress = new ArrayList(); //Was dann getrückt werden kann
+            foreach (int[] check in checkQuere)
             {
-                Button button = (Button)buttons[take[i]]; //Holt sich den aktuellen button
-                if (button.Enabled || button.Text == watcher.GetPlayer(!watcher.ActivePlayer)) //prüft ob dieser button klickbar oder das eigene ist
+                //Prüfen ob etwas gesetzt werden kann
+                int isRow = 0; //Wie viel der bot haben kann
+                int isTargetRow = 0; //Wie viel der gegner hat
+
+                for (int i = 0; i < 3; i++) //geht das feld durch
                 {
-                    if (button.Enabled) //Nur in die liste aufnehmen wenn es klickbar ist
-                        toPress.Add(button);
-                    isRow++; //Zählt wie viel von start zu stop klickbar oder einem selbst gehört
+                    if (!defent)
+                        toPress.Clear(); //Soll es dann löschen
+
+                    Button button = (Button)buttons[check[i]]; //Holt sich den aktuellen button
+                    if (button.Enabled || button.Text == watcher.GetPlayer(!watcher.ActivePlayer)) //prüft ob dieser button klickbar oder das eigene ist
+                    {
+                        if (button.Enabled) //Nur in die liste aufnehmen wenn es klickbar ist
+                            toPress.Add(button);
+                        isRow++; //Zählt wie viel von start zu stop klickbar oder einem selbst gehört
+                    }
+                    else
+                        isTargetRow++; //Zählt wie viel klickbar ist
                 }
-                else
-                    isTargetRow++; //Zählt wie viel von start zu stop nicht klickbar ist
+
+                if (isTargetRow == 2)
+                    defent = true; //Wenn er sich verteidigen muss
+                if (isRow == 3 && !defent)
+                    continue;
             }
-            //if(isRow == 3 || isTargetRow == 2 && toPress.Count >= 1)
-            if(isRow == 3 && !(isTargetRow == 2) || isTargetRow == 2 && toPress.Count >= 1)
+            
+            if(toPress.Count >= 1)
             {
-                watcher.AdditionalText("Calc");
-                try
+                if(defent)
                 {
-                    //Random eins auswählen
-                    Random random = new Random();//Randommizer wird erstellt. Um Random ein button auszuwählen
-                    Button clickButton = (Button)toPress[random.Next(0, toPress.Count)];
-                    clickButton.PerformClick();
-                }
-                catch (Exception ex)
+                    try
+                    {
+                        watcher.AdditionalText("Defent");
+                        //Random eins auswählen
+                        Random random = new Random();
+                        Button clickButton = (Button)toPress[random.Next(0, toPress.Count)];
+                        clickButton.PerformClick();
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Valve plz fix! Code: #00003\n" + ex.Message);
+                    }
+                } else
                 {
-                    MessageBox.Show("Valve plz fix! Code: #00001\n" + ex.Message);
+                    try
+                    {
+                        watcher.AdditionalText("Fight");
+                        //Random eins auswählen
+                        Random random = new Random();//Randommizer wird erstellt. Um Random ein button auszuwählen
+                        Button clickButton = (Button)toPress[random.Next(0, toPress.Count)];
+                        clickButton.PerformClick();
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Valve plz fix! Code: #00001\n" + ex.Message);
+                    }
                 }
-                return true;
+            } else
+            {
+                watcher.AdditionalText("Random");
+                RandomClick();
             }
-            return false;
         }
 
         //Klickt nach der AI tabelle und auch Random
