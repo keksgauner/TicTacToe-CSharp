@@ -9,7 +9,7 @@ using System.Windows.Forms;
 
 namespace TTT
 {
-    internal class Bot
+    public class Bot
     {
         public bool Enabled { get { return enabled; } } //Von auserhalb sollte darauf nur zugegriffen werden können. Nicht verändert
 

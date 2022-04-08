@@ -7,6 +7,11 @@ namespace TTT
 {
     public partial class Form1 : Form
     {
+        //Ob bei rundenende eine Message angezeigt werden soll.
+        //Statisch da es von überall darauf zugregiffen wird
+        public static bool DialogFeld { get { return dialogFeld; } set { dialogFeld = value; } }
+        static bool dialogFeld = true;
+
         //Boolean welcher angibt welcher Spieler am zug ist!
         // Spieler 1 entspricht activePlayer = false
         // Spieler 2 entspricht active Player = true
@@ -35,13 +40,16 @@ namespace TTT
         //Watcher erlaubt das Spielfeld zu analysieren
         Watcher watcher;
 
+        //Form Development sind zusätzliche funktionen und Informationen
+        Form developemntForm;
+
         public Form1()
         {
             InitializeComponent();
             //Zugriffe auf Variablen geht erst nach dem Programmstart
             buttons = new ArrayList() { A1, A2, A3, B1, B2, B3, C1, C2, C3 };
             //Ref geht erst nach dem Programmstart
-            watcher = new Watcher(ref buttons, ref debugClicked1, ref debugClicked2, ref debugOutput1, ref debugOutput2, ref debugOutput3);
+            watcher = new Watcher(ref buttons);
             //Inizialisiere bot AI
             bot = new Bot(ref buttons, ref watcher);
         }
@@ -197,7 +205,7 @@ namespace TTT
                 spielzug /= 2;
                 spielzug = Math.Round(spielzug, MidpointRounding.AwayFromZero); //Berechnen wie viele Spielzüge von dem einen Spieler benötigt werden!
 
-                if(debugTimerAutoPlay.Enabled) //Kein dialogfeld bei autoplay
+                if(!dialogFeld) //Kein dialogfeld bei autoplay
                 {
                     ClearPlayground();  //Spielfeld bereinigen
                     spielzug = 0;   //Spielzüge auf 0 setzen
@@ -219,7 +227,7 @@ namespace TTT
                     watcher.SetToData(true);
                 }
 
-                if (debugTimerAutoPlay.Enabled) //Kein dialogfeld bei autoplay
+                if (!dialogFeld) //Kein dialogfeld bei autoplay
                 {
                     ClearPlayground();  //Spielfeld bereinigen
                     spielzug = 0;   //Spielzüge auf 0 setzen
@@ -338,25 +346,22 @@ namespace TTT
             bot.SetMode("hard"); //Übergabe wie stark der bot sein soll
         }
 
-        private void debugDevelopmentToolStripMenuItem_CheckedChanged(object sender, EventArgs e)
+        private void debugDevelopmentToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if(debugDevelopmentToolStripMenuItem.Checked)
-                debugOutput1.Visible = debugOutput2.Visible = debugOutput3.Visible = debugClicked1.Visible = debugClicked2.Visible = debugAutoPlay.Visible = true;
-            else
-                debugOutput1.Visible = debugOutput2.Visible = debugOutput3.Visible = debugClicked1.Visible = debugClicked2.Visible = debugAutoPlay.Visible = false;
-        }
-
-        private void debugAutoPlay_CheckedChanged(object sender, EventArgs e)
-        {
-            //Startet das random klicke
-            debugTimerAutoPlay.Enabled = debugAutoPlay.Checked;
-        }
-
-        private void debugTimerAutoPlay_Tick(object sender, EventArgs e)
-        {
-            //Klickt Random und auch mit der AI-Tabelle
-            if (!activePlayer)
-                bot.RandomCalcClick();
+            {
+                //Form erstellen
+                developemntForm = new DevelopmentForm(ref watcher, ref bot, ref buttons);
+                //Form anzeigen
+                developemntForm.Show();
+            } else
+            {
+                //Form schlißen
+                developemntForm.Dispose();
+                developemntForm = null;
+                //Reset des watchers
+                watcher = new Watcher(ref buttons);
+            }
         }
     }
 }

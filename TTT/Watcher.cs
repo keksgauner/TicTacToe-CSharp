@@ -26,11 +26,7 @@ namespace TTT
         int spielzug; //Was der letzte spielzug war
 
         ArrayList buttons; // Alle Buttons die existieren
-        Label label1; // Outputfield für einen einfachen Text
-        Label label2; // Outputfield für einen einfachen Text wie es dem bot geht
-        TextBox textBox1; // Outputfield eins
-        TextBox textBox2; // Outputfield zwei
-        TextBox textBox3; // Outputfield drei
+        TextBox[] textBoxes; //Alle Text Boxen für den Output
 
         string additionalText = "";
 
@@ -42,25 +38,6 @@ namespace TTT
         public Watcher(ref ArrayList buttons)
         {
             this.buttons = buttons;
-
-            // Fülle inhalt mit 0 damit ein unterschied erkennbar ist
-            for (int i = 0; i < 9; i++)
-            {
-                oldState[i] = "0";
-                newState[i] = "0";
-            }
-        }
-
-        public Watcher(ref ArrayList buttons, ref Label label1, ref Label label2, ref TextBox textBox1, ref TextBox textBox2, ref TextBox textBox3)
-        {
-            debug = true;
-            //Überladen von Objekten aus der Form
-            this.buttons = buttons;
-            this.label1 = label1;
-            this.label2 = label2;
-            this.textBox1 = textBox1;
-            this.textBox2 = textBox2;
-            this.textBox3 = textBox3;
 
             // Fülle inhalt mit 0 damit ein unterschied erkennbar ist
             for (int i = 0; i < 9; i++)
@@ -169,7 +146,7 @@ namespace TTT
                     {
                         success++;//Nur Statistik ob er ein neuen weg speichern konnte
                         File.AppendAllText(fileName, writeText);  //Es ist noch nicht vorhanden darum wird es hinzugefügt
-                        label2.Text = "Speichere " + id + " bei " + playerTwo[id];
+                        if (debug) textBoxes[0].Text = "Speichere " + id + " bei " + playerTwo[id];
                     }
                     else 
                         fail++;//Nur Statistik ob er ein weg nicht speichern konnte
@@ -192,7 +169,7 @@ namespace TTT
                         if (splitted[0] != playerTwo[id]) //Suche nach key
                             newStrings.AppendLine(fileSearch); //Zeile zum StringBuilder hinzufügen
                         else
-                            label2.Text = "Lösche " + id + " bei " + playerTwo[id];
+                            if(debug) textBoxes[0].Text = "Lösche " + id + " bei " + playerTwo[id];
                     }
                     // mit Hilfe des StringBuilder Inhalts, die vorhandene Datei ersetzen
                     File.WriteAllText(fileName, newStrings.ToString(), Encoding.Default);
@@ -235,35 +212,43 @@ namespace TTT
             playerTwo = new Dictionary<int, string>(); //Speichert den ablauf des zweiten Spielers
         }
 
+
+        public void SetDebug(TextBox[] textBoxes)
+        {
+            debug = true;
+            //Überladen von Objekten aus der Form
+            this.textBoxes = textBoxes;
+        }
+
         public void UpdateDebug()
         {
             if (!debug) return; //Falls kein debug nötig ist
 
-            textBox1.Text = "";
+            textBoxes[1].Text = "";
 
-            textBox1.Text += "Success" + success + Environment.NewLine;
-            textBox1.Text += "Fail" + fail + Environment.NewLine;
-            textBox1.Text += "Won" + won + Environment.NewLine;
-            textBox1.Text += "Loose" + loose + Environment.NewLine;
+            textBoxes[1].Text += "Success" + success + Environment.NewLine;
+            textBoxes[1].Text += "Fail" + fail + Environment.NewLine;
+            textBoxes[1].Text += "Won" + won + Environment.NewLine;
+            textBoxes[1].Text += "Loose" + loose + Environment.NewLine;
 
-            textBox1.Text += Environment.NewLine + "Player One:" + Environment.NewLine;
+            textBoxes[2].Text = "Player One:" + Environment.NewLine;
             foreach (int key in playerOne.Keys)
             {
-                textBox1.Text += "[" + key + " <= " + playerOne[key] + Environment.NewLine;
+                textBoxes[2].Text += "[" + key + " <= " + playerOne[key] + Environment.NewLine;
             }
 
-            textBox1.Text += Environment.NewLine + "Player Two:" + Environment.NewLine;
+            textBoxes[3].Text = "Player Two:" + Environment.NewLine;
             foreach (int key in playerTwo.Keys)
             {
-                textBox1.Text += "[" + key + " <= " + playerTwo[key] + Environment.NewLine;
+                textBoxes[3].Text += "[" + key + " <= " + playerTwo[key] + Environment.NewLine;
             }
 
             //Gibt den string im debug feld aus
-            textBox2.Text = ConvertStringToNormalString(oldState);
-            textBox3.Text = ConvertStringToNormalString(newState);
+            textBoxes[4].Text = ConvertStringToNormalString(oldState);
+            textBoxes[5].Text = ConvertStringToNormalString(newState);
 
             //Gibt den int im debug label aus
-            label1.Text = additionalText + "/" + clicked.ToString();
+            textBoxes[6].Text = additionalText + "/" + clicked.ToString();
         }
 
         public void AdditionalText(String outside)
