@@ -41,5 +41,10 @@ namespace TTT
             Form1.DialogFeld = !checkBox1.Checked;
             timer1.Enabled = checkBox1.Checked;
         }
+
+        private void textBox8_TextChanged(object sender, EventArgs e)
+        {
+            timer1.Interval = Convert.ToInt32(textBox8.Text);
+        }
     }
 }
