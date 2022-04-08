@@ -115,6 +115,7 @@ namespace TTT
                         checkQuere.Add(new[] { 1, 4, 7 });
                         checkQuere.Add(new[] { 2, 5, 8 });
                         ForcePreCalculateKlick(checkQuere);*/
+                        watcher.AdditionalText("Random");
                         RandomClick();
                     }
                 }

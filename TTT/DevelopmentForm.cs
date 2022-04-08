@@ -28,7 +28,14 @@ namespace TTT
         {
             //Klickt Random und auch mit der AI-Tabelle
             if (!Form1.ActivePlayer)
-                bot.RandomCalcClick();
+            {
+                if(radioButton1.Checked)
+                    bot.RandomClick();
+                if (radioButton2.Checked)
+                    bot.RandomCalcClick();
+                if (radioButton3.Checked)
+                    bot.CalcClick();
+            }
         }
 
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
