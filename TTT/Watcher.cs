@@ -14,13 +14,7 @@ namespace TTT
         static long won = 0; //Nur Statistik wie oft er gewinnt
         static long loose = 0; //Nur Statistik wie oft er verliert
 
-        public bool ActivePlayer { get { return activePlayer; } } //Von auserhalb sollte darauf nur zugegriffen werden können. Nicht verändert
-
         bool debug = false;
-        //Boolean activePlayer gibt an welcher Spieler am zug ist!
-        // Spieler 1 entspricht activePlayer = false
-        // Spieler 2 entspricht active Player = true
-        bool activePlayer = false;
 
         int clicked; //Wo etwas geklickt worden ist
         int spielzug; //Was der letzte spielzug war
@@ -97,9 +91,8 @@ namespace TTT
         //Boolean activePlayer gibt an welcher Spieler am zug ist!
         // Spieler 1 entspricht activePlayer = false
         // Spieler 2 entspricht active Player = true
-        public void SaveState(bool activePlayer)
+        public void SaveState()
         {
-            this.activePlayer = activePlayer; //Speicher/Aktualisiere aktuellen Spieler
             spielzug++; //Ein spieolzug muss getätigt worden sein
 
             oldState = newState; //Speichert das alte. Es ist dazu da zu berrechnen wo geklickt worden war
@@ -110,7 +103,7 @@ namespace TTT
 
 
            //Wird richtig hinzugefügt
-           if (activePlayer)
+           if (Form1.ActivePlayer)
                 playerOne.Add(clicked, ConvertStringToNormalString(oldState));
             else
                 playerTwo.Add(clicked, ConvertStringToNormalString(oldState));
@@ -118,16 +111,15 @@ namespace TTT
         }
 
         //Boolean activePlayer gibt an wer gewonnen hat!
-        public void SetToData(bool activePlayer)
+        public void SetToData()
         {
-            this.activePlayer = activePlayer;//Speicher/Aktualisiere aktuellen Spieler
             String fileName = "botstrings.txt";
 
             //Falls file nicht existiert. Einmal erstellen
             if (!File.Exists(fileName))
                 File.AppendAllText(fileName, "000000000;0\n");
 
-            if (!activePlayer) //Wenn der bot gewinnt. Die schritte speichern
+            if (!Form1.ActivePlayer) //Wenn der bot gewinnt. Die schritte speichern
             {
                 won++;//Nur Statistik wie oft er gewinnt
                 foreach (int id in playerTwo.Keys)

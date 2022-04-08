@@ -139,7 +139,7 @@ namespace TTT
                         toPress.Clear(); //Soll es dann löschen
 
                     Button button = (Button)buttons[check[i]]; //Holt sich den aktuellen button
-                    if (button.Enabled || button.Text == watcher.GetPlayer(!watcher.ActivePlayer)) //prüft ob dieser button klickbar oder das eigene ist
+                    if (button.Enabled || button.Text == watcher.GetPlayer(!Form1.ActivePlayer)) //prüft ob dieser button klickbar oder das eigene ist
                     {
                         if (button.Enabled) //Nur in die liste aufnehmen wenn es klickbar ist
                             toPress.Add(button);

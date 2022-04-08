@@ -13,10 +13,6 @@ namespace TTT
 {
     public partial class DevelopmentForm : Form
     {
-
-        //Watcher erlaubt das Spielfeld zu analysieren
-        Watcher watcher;
-
         Bot bot;
 
         public DevelopmentForm(ref Watcher watcher, ref Bot bot, ref ArrayList buttons)
@@ -24,15 +20,14 @@ namespace TTT
             InitializeComponent();
             //Bot aus der Main funktion übernehmen
             this.bot = bot;
-            //Watcher wird aus der Main funktion übernommen
-            this.watcher = watcher;
+            //Watcher wird aus der Main funktion umgeschrieben
             watcher.SetDebug(new TextBox[] { textBox1, textBox2, textBox3, textBox4, textBox5, textBox6, textBox7 });
         }
 
         private void timer1_Tick(object sender, EventArgs e)
         {
             //Klickt Random und auch mit der AI-Tabelle
-            if (!watcher.ActivePlayer)
+            if (!Form1.ActivePlayer)
                 bot.RandomCalcClick();
         }
 

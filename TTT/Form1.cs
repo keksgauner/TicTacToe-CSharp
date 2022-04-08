@@ -7,6 +7,7 @@ namespace TTT
 {
     public partial class Form1 : Form
     {
+
         //Ob bei rundenende eine Message angezeigt werden soll.
         //Statisch da es von überall darauf zugregiffen wird
         public static bool DialogFeld { get { return dialogFeld; } set { dialogFeld = value; } }
@@ -16,7 +17,8 @@ namespace TTT
         // Spieler 1 entspricht activePlayer = false
         // Spieler 2 entspricht active Player = true
         // Spieler 1 beginnt!
-        bool activePlayer = false;
+        public static bool ActivePlayer { get { return activePlayer; } }
+        static bool activePlayer = false;
 
         //Zähler der Spielzüge
         double spielzug = 0;
@@ -186,7 +188,7 @@ namespace TTT
         private void WinnerCheck()
         {
             //Speichere Spielvorgang in Watcher
-            watcher.SaveState(activePlayer);
+            watcher.SaveState();
 
             //Gewinner Nachricht ausgeben!
             if (WinnerAvaible())
@@ -194,7 +196,7 @@ namespace TTT
                 //Speichert den Spielfortsritt in eine Datei falls Developmentmode an ist
                 if (bot.Enabled)
                 {
-                    watcher.SetToData(activePlayer);
+                    watcher.SetToData();
                 }
 
                 if (activePlayer)
@@ -224,7 +226,7 @@ namespace TTT
                 //Speichert den Spielfortsritt der AI in eine Datei
                 if (bot.Enabled)
                 {
-                    watcher.SetToData(true);
+                    watcher.SetToData();
                 }
 
                 if (!dialogFeld) //Kein dialogfeld bei autoplay
