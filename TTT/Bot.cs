@@ -99,6 +99,7 @@ namespace TTT
                         performButton.PerformClick(); //Führt ein Click Event aus
                     } else
                     {
+                        /* Bot, bleibe dumm!
                         ArrayList checkQuere = new ArrayList();
                         //Horizontale Abfragen
                         checkQuere.Add(new[] { 0, 1, 2 });
@@ -113,7 +114,8 @@ namespace TTT
                         checkQuere.Add(new[] { 0, 3, 6 });
                         checkQuere.Add(new[] { 1, 4, 7 });
                         checkQuere.Add(new[] { 2, 5, 8 });
-                        ForcePreCalculateKlick(checkQuere);
+                        ForcePreCalculateKlick(checkQuere);*/
+                        RandomClick();
                     }
                 }
             }
