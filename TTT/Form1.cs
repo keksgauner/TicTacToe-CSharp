@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Drawing;
 using System.Windows.Forms;
 
@@ -6,11 +7,18 @@ namespace TTT
 {
     public partial class Form1 : Form
     {
+
+        //Ob bei rundenende eine Message angezeigt werden soll.
+        //Statisch da es von überall darauf zugregiffen wird
+        public static bool DialogFeld { get { return dialogFeld; } set { dialogFeld = value; } }
+        static bool dialogFeld = true;
+
         //Boolean welcher angibt welcher Spieler am zug ist!
         // Spieler 1 entspricht activePlayer = false
         // Spieler 2 entspricht active Player = true
         // Spieler 1 beginnt!
-        bool activePlayer = false;
+        public static bool ActivePlayer { get { return activePlayer; } }
+        static bool activePlayer = false;
 
         //Zähler der Spielzüge
         double spielzug = 0;
@@ -25,10 +33,29 @@ namespace TTT
         //Aktive Spielerfarbe
         Color activePlayerColor = new Color();
 
+        //Alle Knöpfe
+        ArrayList buttons;
+
+        //Botzugriff
+        Bot bot;
+
+        //Watcher erlaubt das Spielfeld zu analysieren
+        Watcher watcher;
+
+        //Form Development sind zusätzliche funktionen und Informationen
+        Form developemntForm;
+
         public Form1()
         {
             InitializeComponent();
+            //Zugriffe auf Variablen geht erst nach dem Programmstart
+            buttons = new ArrayList() { A1, A2, A3, B1, B2, B3, C1, C2, C3 };
+            //Ref geht erst nach dem Programmstart
+            watcher = new Watcher(ref buttons);
+            //Inizialisiere bot AI
+            bot = new Bot(ref buttons, ref watcher);
         }
+        
 
         private void Form1_Load(object sender, EventArgs e)
         {
@@ -110,6 +137,9 @@ namespace TTT
 
         private bool WinnerAvaible()
         {
+            //Unötige Abfragen vermeiden
+            if(spielzug < 4) return false;
+
             //Horizontale Abfragen
 
             if ((A1.Text == A2.Text) && (A2.Text == A3.Text) && (!A1.Enabled))    //erste Zeile abfragen!
@@ -150,15 +180,25 @@ namespace TTT
             {
                 return true;   //Gewinner ist bekannt!
             }
+
             return false; //Kein Gewinner ist bekannt!
 
         }
 
         private void WinnerCheck()
         {
+            //Speichere Spielvorgang in Watcher
+            watcher.SaveState();
+
             //Gewinner Nachricht ausgeben!
             if (WinnerAvaible())
             {
+                //Speichert den Spielfortsritt in eine Datei falls Developmentmode an ist
+                if (bot.Enabled)
+                {
+                    watcher.SetToData();
+                }
+
                 if (activePlayer)
                     Gewinner = "O";
                 else
@@ -166,6 +206,13 @@ namespace TTT
 
                 spielzug /= 2;
                 spielzug = Math.Round(spielzug, MidpointRounding.AwayFromZero); //Berechnen wie viele Spielzüge von dem einen Spieler benötigt werden!
+
+                if(!dialogFeld) //Kein dialogfeld bei autoplay
+                {
+                    ClearPlayground();  //Spielfeld bereinigen
+                    spielzug = 0;   //Spielzüge auf 0 setzen
+                    return; //Programm abbruch. Weiteres wird nicht benötigt
+                }
 
                 DialogResult winnerRead = MessageBox.Show(this, "Spieler " + Gewinner + " hat das Spiel mit " + spielzug + " Spielzügen gewonnen!", "Gewinner", MessageBoxButtons.OK, MessageBoxIcon.Information);  //Ausgabe der MessageBox
                 if (winnerRead == DialogResult.OK)
@@ -176,6 +223,19 @@ namespace TTT
             }
             else if (((!A1.Enabled) && (!A2.Enabled) && (!A3.Enabled)) && ((!B1.Enabled) && (!B2.Enabled) && (!B3.Enabled)) && ((!C1.Enabled) && (!C2.Enabled) && (!C3.Enabled)))   //Abfragen Ob unentschieden!
             {
+                //Speichert den Spielfortsritt der AI in eine Datei
+                if (bot.Enabled)
+                {
+                    watcher.SetToData();
+                }
+
+                if (!dialogFeld) //Kein dialogfeld bei autoplay
+                {
+                    ClearPlayground();  //Spielfeld bereinigen
+                    spielzug = 0;   //Spielzüge auf 0 setzen
+                    return; //Programm abbruch. Weiteres wird nicht benötigt
+                }
+
                 DialogResult winnerRead = MessageBox.Show(this, "Das Spiel ist Unentschieden!", "Unentschieden!", MessageBoxButtons.OK, MessageBoxIcon.Information);    //MessageBox für Unentschieden ausgeben!
                 if (winnerRead == DialogResult.OK)
                 {
@@ -183,78 +243,60 @@ namespace TTT
                     spielzug = 0;   //Spielzüge auf 0 setzen
                 }
             }
+
+            //Bot logik
+            if (activePlayer && bot.Enabled) bot.Choose();
+
         }
 
         public void ClearPlayground()   //Spielfeld bereinigen
         {
+            watcher.Clear();
             optionenToolStripMenuItem.Enabled = true;
-            A1.Text = "";       //Button Text zurücksetzen
-            A1.Enabled = true;  //Button wieder enablen!
-            A1.BackColor = Color.White; //Farbe zurücksetzen
-
-            B1.Text = "";
-            B1.Enabled = true;
-            B1.BackColor = Color.White;
-
-            C1.Text = "";
-            C1.Enabled = true;
-            C1.BackColor = Color.White;
-
-            A2.Text = "";
-            A2.Enabled = true;
-            A2.BackColor = Color.White;
-
-            B2.Text = "";
-            B2.Enabled = true;
-            B2.BackColor = Color.White;
-
-            C2.Text = "";
-            C2.Enabled = true;
-            C2.BackColor = Color.White;
-
-            A3.Text = "";
-            A3.Enabled = true;
-            A3.BackColor = Color.White;
-
-            B3.Text = "";
-            B3.Enabled = true;
-            B3.BackColor = Color.White;
-
-            C3.Text = "";
-            C3.Enabled = true;
-            C3.BackColor = Color.White;
+            foreach(Button btn in buttons)
+            {
+                btn.Text = "";       //Button Text zurücksetzen
+                btn.Enabled = true;  //Button wieder enablen!
+                btn.BackColor = Color.White; //Farbe zurücksetzen
+            }
+            if (activePlayer) bot.Choose();
         }
 
         private void NewGameToolStripMenuItem_Click(object sender, EventArgs e) //Aktion für MenüPunkt Start > New Game
         {
+
+            //Reset AI
+            DisableAllBotMenuItems();
+            offToolStripMenuItem.Checked = true;
+            bot.SetMode(""); //Wenn der mode nicht gesetzt wird ist der bot aus
+
             ClearPlayground();  //Spielfeld bereinigen
             spielzug = 0;   //Spielzüge zurücksetzen
             activePlayer = false;  //Spieler zurücksetzen!
             playerXColor = Color.White; //Spielerfarbe zurücksetzen!
             playerYColor = Color.White; //Spielerfarbe zurücksetzen!
-            toolStripMenuItem2.BackColor = playerXColor;
-            toolStripMenuItem3.BackColor = playerYColor;
+            spielerXToolStripMenuItem.BackColor = playerXColor;
+            spielerOToolStripMenuItem.BackColor = playerYColor;
         }
 
-        private void ColorPickerToolStripMenuItem_Click(object sender, EventArgs e) //Spielerfarbe für Spieler X
+
+        private void spielerXToolStripMenuItem_Click(object sender, EventArgs e)
         {
             ColorDialog colorDialog = new ColorDialog();    //ColorPicker Objekt erstellen
             colorDialog.SolidColorOnly = true;              //Transparenz in Bildern verbieten
             colorDialog.ShowDialog();                       //Dialog anzeigen
             Color playerColor = colorDialog.Color;          //Farbe setzen!
-            toolStripMenuItem2.BackColor = playerColor;   // Menupunkt einfärben
+            spielerXToolStripMenuItem.BackColor = playerColor;   // Menupunkt einfärben
             playerXColor = playerColor;     //Farbe übergeben
-
-
         }
 
-        private void SpielerfarbeÄndernToolStripMenuItem_Click(object sender, EventArgs e)  //Spielerfarbe für Spieler Y
+        private void spielerOToolStripMenuItem_Click(object sender, EventArgs e)
         {
             ColorDialog colorDialog = new ColorDialog();    //ColorPicker Objekt erstellen
             colorDialog.SolidColorOnly = true;              //Transparenz in Bildern verbieten
             colorDialog.ShowDialog();                       //Dialog anzeigen
             Color playerColor = colorDialog.Color;          //Farbe setzen!
-            toolStripMenuItem3.BackColor = playerColor;   // Menupunkt einfärben
+            spielerOToolStripMenuItem.BackColor = playerColor;   // Menupunkt einfärben
             playerYColor = playerColor;     //Farbe übergeben
         }
 
@@ -267,6 +309,61 @@ namespace TTT
             else
                 activePlayerColor = playerYColor;
 
+        }
+
+        private void DisableAllBotMenuItems()
+        {
+            offToolStripMenuItem.Checked = false;
+            easyToolStripMenuItem.Checked = false;
+            normalToolStripMenuItem.Checked = false;
+            hardToolStripMenuItem.Checked = false;
+
+        }
+
+        private void offToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            DisableAllBotMenuItems();
+            offToolStripMenuItem.Checked = true;
+            bot.SetMode(""); //Wenn der mode nicht gesetzt wird ist der bot aus
+        }
+
+        private void easyToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            DisableAllBotMenuItems();
+            easyToolStripMenuItem.Checked = true;
+            bot.SetMode("easy"); //Übergabe wie stark der bot sein soll
+        }
+
+        private void normalToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            DisableAllBotMenuItems();
+            normalToolStripMenuItem.Checked = true;
+            bot.SetMode("normal"); //Übergabe wie stark der bot sein soll
+        }
+
+        private void hardToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            DisableAllBotMenuItems();
+            hardToolStripMenuItem.Checked = true;
+            bot.SetMode("hard"); //Übergabe wie stark der bot sein soll
+        }
+
+        private void debugDevelopmentToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if(debugDevelopmentToolStripMenuItem.Checked)
+            {
+                //Form erstellen
+                developemntForm = new DevelopmentForm(ref watcher, ref bot, ref buttons);
+                //Form anzeigen
+                developemntForm.Show();
+            } else
+            {
+                //Form schlißen
+                developemntForm.Dispose();
+                developemntForm = null;
+                //Reset des watchers
+                watcher = new Watcher(ref buttons);
+            }
         }
     }
 }
